@@ -4,7 +4,7 @@
 
 # Database Diagram
 
-![ERD](ERD.png)
+![ERD](./ERD.jpg)
 
 # Endpoint
 
