@@ -23,9 +23,26 @@ h1 {
     color: white !important
 }
 
+.danger-outline {
+    border: #FA2C5A 1px solid;
+    color: #FA2C5A !important
+}
+
 .primary-outline {
     border: #0d28a6 1px solid;
     color: #0d28a6 !important;
+}
+
+.primary-outline-nonactive {
+    border: #AEB7E1 1px solid;
+    color: #AEB7E1 !important;
+}
+
+.primary-outline-nonactive.active {
+    border: #0d28a6 1px solid;
+    color: #0d28a6 !important;
+    background-color: #CFD4ED;
+    font-weight: bold;
 }
 
 
@@ -250,4 +267,9 @@ a.list-group-item {
 
 .list-group a p {
     font-size: 12px;
+}
+
+#profile_img {
+    width: 38px;
+    height: 38px;
 }

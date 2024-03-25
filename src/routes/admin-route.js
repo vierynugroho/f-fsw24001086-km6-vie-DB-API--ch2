@@ -8,7 +8,7 @@ router.route('/dashboard'); // unknown action (blank page)
 
 //! admin cars
 router.route('/cars/list-car').get(getAdminCarsPage);
-router.route('/cars/list-car/:id').get(getCarsDetailPage);
+router.route('/cars/list-car/car/:id').get(getCarsDetailPage);
 
 router.route('/cars/list-car/add').get(getAddCarPage);
 router.route('/cars/list-car/edit/:id').get(getEditCarPage);

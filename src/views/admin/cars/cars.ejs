@@ -2,10 +2,10 @@
 <%- include('../../components/html_header.ejs') %>
 
 <aside
-	class="collapse collapse-horizontal"
+	class="collapse collapse-horizontal float-start"
 	id="sidebar_nav"
 >
-	<div class="row justify-content-start align-items-center float-start">
+	<div class="row justify-content-start align-items-center">
 		<div
 			class="col-4 bg-primary"
 			id="sidebar_menu"
@@ -66,175 +66,234 @@
 		</div>
 	</div>
 </aside>
+
 <main>
-	<div class="row justify-content-start align-items-center">
-		<div
-			id="menu_left-header"
-			class="col-6"
-		>
-			<p>
-				<button
-					class="btn border-0 mt-2"
-					type="button"
-					data-bs-toggle="collapse"
-					data-bs-target="#sidebar_nav"
+	<div class="container bg-transparent">
+		<!--! HEADER  -->
+		<div class="row">
+			<div
+				id="menu_left-header"
+				class="col-6 d-flex justify-content-start align-items-center"
+			>
+				<p>
+					<button
+						class="btn border-0 mt-2"
+						type="button"
+						data-bs-toggle="collapse"
+						data-bs-target="#sidebar_nav"
+						aria-expanded="false"
+						aria-controls="sidebar_nav"
+					>
+						<img
+							src="/assets/images/fi_menu.svg"
+							alt="hamburger"
+							class="img-fluid"
+						/>
+					</button>
+				</p>
+			</div>
+
+			<div
+				id="menu_right-header"
+				class="col-6 d-flex justify-content-end align-items-center gap-2"
+			>
+				<form
+					class="d-flex"
+					role="search"
+				>
+					<input
+						class="form-control rounded-0"
+						type="search"
+						placeholder="Search"
+						aria-label="Search"
+					/>
+					<button
+						class="btn btn-outline-primary rounded-0"
+						type="submit"
+					>
+						Search
+					</button>
+				</form>
+				<a
+					class="nav-link dropdown-toggle"
+					href="#"
+					role="button"
+					data-bs-toggle="dropdown"
 					aria-expanded="false"
-					aria-controls="sidebar_nav"
 				>
 					<img
-						src="/assets/images/fi_menu.svg"
-						alt="hamburger"
-						class="img-fluid"
+						src="https://t4.ftcdn.net/jpg/05/09/59/75/360_F_509597532_RKUuYsERhODmkxkZd82pSHnFtDAtgbzJ.jpg"
+						alt="img"
+						id="profile_img"
+						class="img-fluid rounded rounded-circle"
 					/>
-				</button>
-			</p>
+					Viery Nugroho
+				</a>
+				<ul class="dropdown-menu">
+					<li>
+						<a
+							class="dropdown-item"
+							href="#"
+							>Profile</a
+						>
+					</li>
+					<li>
+						<a
+							class="dropdown-item"
+							href="#"
+							>Settings</a
+						>
+					</li>
+					<hr class="dropdown-divider" />
+					<li>
+						<a
+							class="dropdown-item"
+							href="#"
+							>Logout</a
+						>
+					</li>
+				</ul>
+			</div>
 		</div>
-		<div
-			id="menu_right-header"
-			class="col-6 d-flex justify-content-end"
-		>
-			<form
-				class="d-flex"
-				role="search"
-			>
-				<input
-					class="form-control rounded-0"
-					type="search"
-					placeholder="Search"
-					aria-label="Search"
-				/>
-				<button
-					class="btn btn-outline-primary rounded-0"
-					type="submit"
-				>
-					Search
-				</button>
-			</form>
 
-			<ul class="navbar-nav> < class="nav-item dropdown">
-			<a
-				class="nav-link dropdown-toggle"
-				href="#"
-				role="button"
-				data-bs-toggle="dropdown"
-				aria-expanded="false"
-			>
-				<img
-					src=""
-					alt="img"
-				/>
-				Viery Nugroho
-			</a>
-			<ul class="dropdown-menu">
-				<li>
+		<!--! BREADCRUMB  -->
+		<div class="d-flex justify-content-between">
+			<nav class="breadcrumb">
+				<p class="breadcrumb-item fw-bold">Cars</p>
+				<span
+					class="breadcrumb-item active"
+					aria-current="page"
+					>List Car</span
+				>
+			</nav>
+		</div>
+
+		<!--! CONTENT HEADER  -->
+		<div class="d-flex justify-content-between align-items-center">
+			<div class="content_header-title">
+				<h5 class="fw-bold">List Cars</h5>
+			</div>
+			<div class="content_header-button">
+				<a
+					href="list-car/add"
+					class="d-block w-100 py-2 px-4 nav-link rounded-2 primary-color text-white fw-bold text-center"
+				>
+					<i
+						><img
+							src="/assets/images/fi_plus.svg"
+							alt="add-icon"
+					/></i>
+					Add New Car</a
+				>
+			</div>
+		</div>
+
+		<!--! CONTENT FILTER  -->
+		<div class="d-flex justify-content-start align-items-center">
+			<ul class="nav justify-content-center gap-2">
+				<li class="nav-item">
 					<a
-						class="dropdown-item"
-						href="#"
-						>Profile</a
+						class="nav-link py-2 rounded-2 primary-outline-nonactive <% if (capacity === undefined) { %>active<% } %>"
+						href="list-car"
+						aria-current="page"
+						>All</a
 					>
 				</li>
-				<li>
+				<li class="nav-item">
 					<a
-						class="dropdown-item"
-						href="#"
-						>Settings</a
+						class="nav-link py-2 rounded-2 primary-outline-nonactive <% if (capacity === '2') { %>active<% } %>"
+						href="list-car?capacity=2"
+						>Small</a
 					>
 				</li>
-				<hr class="dropdown-divider" />
-				<li>
+				<li class="nav-item">
 					<a
-						class="dropdown-item"
-						href="#"
-						>Logout</a
+						class="nav-link py-2 rounded-2 primary-outline-nonactive <% if (capacity === '4') { %>active<% } %>"
+						href="list-car?capacity=4"
+						>Medium</a
+					>
+				</li>
+				<li class="nav-item">
+					<a
+						class="nav-link py-2 rounded-2 primary-outline-nonactive <% if (capacity === '6') { %>active<% } %>"
+						href="list-car?capacity=6"
+						>Large</a
 					>
 				</li>
 			</ul>
 		</div>
-	</div>
-	<div class="d-flex justify-content-center-align-items-center">
-		<div class="row p-3 shadow-lg container mx-auto d-flex justify-content-evenly gap-2">
-			<% cars.map((car)=>{ %>
 
-			<div
-				class="col-3 card border-0"
-				id="card-car"
-			>
-				<div class="card-body h-100">
-					<img
-						class="img-fluid"
-						id="img-car"
-						src="/assets/<%- car.image %>"
-						alt="<%- car.manufacture %>"
-					/>
-					<h2
-						class="card-title fw-bold pt-2"
-						id="car-name"
-					>
-						<%- car.manufacture+ ' ' + car.model +'/' + car.type %>
-					</h2>
-					<h4
-						class="card-sub-title fw-bold"
-						id="car-rent"
-					>
-						<%- car.rentPerDay+'/hari' %>
-					</h4>
-					<p class="card-text">${this.description}</p>
-					<ul class="list-group car-list">
-						<li class="list-group-item">
-							<i
-								><img
-									src="/assets/images/fi_passenger.svg"
-									alt="user-icon"
-							/></i>
-							<%- car.capacity %> Orang
-						</li>
-						<li class="list-group-item">
-							<i
-								><img
-									src="/assets/images/fi_settings.svg"
-									alt="user-icon"
-							/></i>
-							<%- car.transmission %>
-						</li>
-						<li class="list-group-item">
-							<i
-								><img
-									src="/assets/images/fi_calendar.svg"
-									alt="user-icon"
-							/></i>
-							Tahun <%- car.year %>
-						</li>
-					</ul>
-				</div>
-				<div class="card-footer border-0">
-					<div class="d-flex gap-2">
-						<a
-							href="list-car/<%- car.id %>"
-							class="d-block w-100 py-2 nav-link btn btn-outline-danger text-danger fw-bold text-center"
+		<!--! CONTENT -->
+		<div class="d-flex justify-content-center-align-items-center">
+			<div class="row m-3 mx-auto d-flex justify-content-evenly">
+				<% cars.map((car)=>{ %>
+
+				<div
+					class="col-4 card border-0 mt-4"
+					id="card-car"
+				>
+					<div class="card-body h-100">
+						<img
+							class="img-fluid"
+							id="img-car"
+							src="/assets/<%- car.image %>"
+							alt="<%- car.name %>"
+						/>
+						<h2
+							class="card-title fw-bold pt-2"
+							id="car-name"
 						>
-							<i
-								><img
-									src="/assets/images/fi_trash-2.svg"
-									alt="user-icon"
-							/></i>
-							Delete</a
+							<%- car.name %>
+						</h2>
+						<h4
+							class="card-sub-title fw-bold"
+							id="car-rent"
 						>
-						<a
-							href="list-car/edit/<%- car.id %>"
-							class="d-block w-100 py-2 nav-link rounded-2 success-color text-white fw-bold text-center"
-						>
-							<i
-								><img
-									src="/assets/images/fi_edit.svg"
-									alt="user-icon"
-							/></i>
-							Edit</a
-						>
+							<%- 'Rp. ' + car.rentPerDay + '/ hari' %>
+						</h4>
+						<i
+							><img
+								src="/assets/images/fi_clock.svg"
+								alt="clock-icon"
+						/></i>
+						<%- car.updatedAt %>
+					</div>
+					<div class="card-footer border-0">
+						<div class="d-flex gap-2">
+							<form
+								action="/list-car/delete/<%- car.id %>"
+								method="post"
+								class="d-block w-100 py-2 nav-link rounded-2 danger-outline fw-bold text-center"
+							>
+								<a
+									href="list-car/<%- car.id %>"
+									class="nav-link"
+								>
+									<i
+										><img
+											src="/assets/images/fi_trash-2.svg"
+											alt="user-icon"
+									/></i>
+									Delete</a
+								>
+							</form>
+							<a
+								href="list-car/edit/<%- car.id %>"
+								class="d-block w-100 py-2 nav-link rounded-2 success-color text-white fw-bold text-center"
+							>
+								<i
+									><img
+										src="/assets/images/fi_edit.svg"
+										alt="user-icon"
+								/></i>
+								Edit</a
+							>
+						</div>
 					</div>
 				</div>
-			</div>
 
-			<% }) %>
+				<% }) %>
+			</div>
 		</div>
 	</div>
 </main>

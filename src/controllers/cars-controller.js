@@ -1,6 +1,7 @@
 const { Car } = require('../databases/models');
 const Joi = require('joi');
 const { randomUUID } = require('crypto');
+const { Op } = require('sequelize');
 
 //! schema validation data
 const carSchema = Joi.object().keys({
@@ -126,9 +127,18 @@ const deleteCar = async (req, res) => {
 //! rendering pages
 const getAdminCarsPage = async (req, res) => {
 	try {
-		const cars = await Car.findAll();
+		const capacity_query = req.query.capacity || '0';
+
+		const cars = await Car.findAll({
+			where: {
+				capacity: {
+					[Op.gte]: capacity_query,
+				},
+			},
+		});
 
 		const data = {
+			capacity: req.query.capacity,
 			cars,
 		};
 
