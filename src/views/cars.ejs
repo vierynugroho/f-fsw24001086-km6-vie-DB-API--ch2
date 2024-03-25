@@ -1,0 +1,312 @@
+<!--! endpoint: /cars -->
+
+<%- include('components/html_header.ejs') %> <%- include('components/header.ejs') %>
+
+<main>
+	<!-- HERO SECTION -->
+	<section
+		id="hero"
+		class="d-flex justify-content-end align-items-center"
+	>
+		<div class="container">
+			<div class="row w-100">
+				<div class="col-12 col-md-7">
+					<div class="container">
+						<div class="row">
+							<div class="col-10">
+								<h1 class="fw-bold">Sewa & Rental Mobil Terbaik di kawasan (Lokasimu)</h1>
+							</div>
+						</div>
+						<div class="row">
+							<div
+								class="col-12"
+								id="hero__body"
+							>
+								<p>Selamat datang di Binar Car Rental. Kami menyediakan mobil kualitas terbaik dengan harga terjangkau. Selalu siap melayani kebutuhanmu untuk sewa mobil selama 24 jam.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div
+					class="col-12 col-md-5 pe-0 position-absolute end-0"
+					id="hero-img"
+				>
+					<img
+						class="img-fluid"
+						src="./assets/images/Mercedes Car EQC 300kW Edition.png"
+						alt="Mercedes"
+					/>
+				</div>
+			</div>
+		</div>
+	</section>
+	<div
+		id="cari_mobil"
+		class="position-relative d-flex justify-content-center align-items-center"
+	>
+		<div
+			class="container position-absolute w-75 rounded shadow-lg mt-2 py-3"
+			id="cari_mobil_container"
+		>
+			<div class="row d-flex justify-content-between align-items-center">
+				<div class="col-12 col-md-10">
+					<div class="row">
+						<div class="col-6 col-md-6 col-lg-3">
+							<div class="mb-3">
+								<label
+									for="driverType"
+									class="form-label"
+									>Tipe Driver</label
+								>
+								<select
+									class="form-select"
+									id="driverType"
+								>
+									<option
+										hidden
+										value=""
+									>
+										Pilih Tipe Driver
+									</option>
+									<option value="dengan supir">Dengan Supir</option>
+									<option value="tanpa supir">Tanpa Supir (Lepas Kunci)</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-6 col-md-6 col-lg-3">
+							<div class="mb-3">
+								<label
+									for="date"
+									class="form-label"
+									>Tanggal</label
+								>
+								<input
+									type="date"
+									class="form-control"
+									id="date"
+								/>
+							</div>
+						</div>
+						<div class="col-6 col-md-6 col-lg-3">
+							<div class="mb-3">
+								<label
+									for="pickUpTime"
+									class="form-label"
+									>Waktu Jemput/Ambil</label
+								>
+								<select
+									class="form-select"
+									aria-label="Default select example"
+									id="pickUpTime"
+								>
+									<option
+										hidden
+										value=""
+									>
+										Pilih Waktu
+									</option>
+									<option value="08:00">
+										<div>08.00</div>
+										<div>WIB</div>
+									</option>
+									<option value="09:00">
+										<div>09.00</div>
+										<div>WIB</div>
+									</option>
+									<option value="10:00">
+										<div>10.00</div>
+										<div>WIB</div>
+									</option>
+									<option value="11:00">
+										<div>11.00</div>
+										<div>WIB</div>
+									</option>
+									<option value="12:00">
+										<div>12.00</div>
+										<div>WIB</div>
+									</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-6 col-md-6 col-lg-3">
+							<div class="mb-3">
+								<label
+									for="totalPassenger"
+									class="form-label"
+									>Jumlah Penumpang</label
+								>
+								<div class="input-group">
+									<input
+										type="number"
+										class="form-control"
+										placeholder="Jumlah Penumpang"
+										aria-label="Jumlah Penumpang"
+										aria-describedby="addon-wrapping"
+										min="0"
+										id="totalPassenger"
+									/>
+									<span
+										class="input-group-text"
+										id="addon-wrapping"
+										><i
+											><img
+												src="./assets/images/fi_users.svg"
+												alt="user-icon" /></i
+									></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-12 col-md-2 d-flex justify-content-end align-items-center">
+					<div class="row w-100">
+						<div class="col-12">
+							<button
+								class="w-100 mx-end nav-link py-2 px-2 rounded success-color fw-bold text-center"
+								type="submit"
+								id="btnCariMobil"
+							>
+								Cari Mobil
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div
+		id="cars-container"
+		class="row d-none p-3 shadow-lg container position-relative w-75 mx-auto d-flex justify-content-evenly gap-2"
+	></div>
+</main>
+
+<footer
+	class="mt-5 mb-2 position-relative"
+	style="margin-top: 100px !important"
+>
+	<div class="container">
+		<div class="row">
+			<div class="col-10 col-md-3 mb-3">
+				<p>Jalan Suroyo No. 161 Mayangan Kota Probolonggo 672000</p>
+				<a
+					class="nav-link mb-2"
+					href="#"
+					>binarcarrental@gmail.com</a
+				>
+				<a
+					class="nav-link"
+					href="#"
+					>081-233-334-808</a
+				>
+			</div>
+			<div class="col-10 col-md-3 mb-3">
+				<a
+					href="#our_services"
+					class="nav-link mb-2"
+					>Our Services</a
+				>
+				<a
+					href="#why_us"
+					class="nav-link my-2"
+					>Why Us</a
+				>
+				<a
+					href="#testimonial"
+					class="nav-link my-2"
+					>Testimonial</a
+				>
+				<a
+					href="#faq"
+					class="nav-link mt-2"
+					>FAQ</a
+				>
+			</div>
+			<div class="col-8 col-md-3 mb-3">
+				<p>Connect with us</p>
+				<div class="row">
+					<div class="col-2">
+						<a
+							href="#"
+							class="nav-link"
+						>
+							<img
+								src="./assets/images/icon_facebook.svg"
+								alt="facebook"
+								id="icon__social_media"
+								class="rounded-circle"
+								title="facebook"
+							/>
+						</a>
+					</div>
+					<div class="col-2">
+						<a
+							href="#"
+							class="nav-link"
+						>
+							<img
+								src="./assets/images/icon_instagram.svg"
+								alt="instagram"
+								id="icon__social_media"
+								class="rounded-circle"
+								title="instagram"
+							/>
+						</a>
+					</div>
+					<div class="col-2">
+						<a
+							href="#"
+							class="nav-link"
+						>
+							<img
+								src="./assets/images/icon_twitter.svg"
+								alt="twitter"
+								id="icon__social_media"
+								class="rounded-circle"
+								title="twitter"
+							/>
+						</a>
+					</div>
+					<div class="col-2">
+						<a
+							href="#"
+							class="nav-link"
+						>
+							<img
+								src="./assets/images/icon_mail.svg"
+								alt="mail"
+								id="icon__social_media"
+								class="rounded-circle"
+								title="mail"
+							/>
+						</a>
+					</div>
+					<div class="col-2">
+						<a
+							href="#"
+							class="nav-link"
+						>
+							<img
+								src="./assets/images/icon_twitch.svg"
+								alt="twitch"
+								id="icon__social_media"
+								class="rounded-circle"
+								title="twitch"
+							/>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-10 col-md-3 mb-3">
+				<p>Copyright Binar 2022</p>
+				<a
+					class="navbar-brand rounded-1 primary-color"
+					href="#"
+				>
+				</a>
+			</div>
+		</div>
+	</div>
+</footer>
+
+<%- include('components/html_footer.ejs') %> <%- include('components/footer_searchCar.ejs') %>

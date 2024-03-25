@@ -1,0 +1,253 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+header {
+    z-index: 999;
+}
+
+h1 {
+    font-size: 36px !important;
+}
+
+/* custom color */
+.success-color {
+    background-color: #5cb85f;
+    color: white !important;
+}
+
+.primary-color {
+    background-color: #0d28a6;
+    color: white !important
+}
+
+.primary-outline {
+    border: #0d28a6 1px solid;
+    color: #0d28a6 !important;
+}
+
+
+/* custom component */
+nav a.navbar-brand,
+footer .container .row .col-10 a.navbar-brand {
+    display: block;
+    width: 100px;
+    height: 34px;
+}
+
+/* layout styles */
+section {
+    width: 100%;
+    height: 100vh;
+}
+
+/* hero */
+section#hero {
+    margin-top: -5%;
+    height: 504px;
+}
+
+#hero__body,
+#banner__body {
+    width: 468px;
+}
+
+/* services */
+ul#list_service {
+    list-style: none;
+}
+
+.custom-icon {
+    background-image: url('../assets/images/list.svg');
+    width: 24px;
+    height: 24px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+#icon {
+    width: 32px;
+}
+
+#icon__social_media {
+    width: 32px;
+}
+
+/* testimonial */
+#profile_img {
+    width: 80px;
+}
+
+#testimonial__carousel-button {
+    width: 32px;
+}
+
+/* banner */
+#banner {
+    background-image: url('../assets/images/banner.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+/* RESPONSIVE BREAKPOINTS */
+@media only screen and (max-width: 576px) {
+    section .container .row #hero-img img {
+        bottom: 0;
+    }
+
+    section#hero {
+        margin-top: 20%;
+        height: 100vh;
+        align-items: start !important;
+    }
+
+
+    #hero__body {
+        width: 100%;
+    }
+
+    #banner__body {
+        width: 212px;
+    }
+
+    #hero-img {
+        bottom: 0 !important;
+    }
+
+    section {
+        margin-top: 20%;
+    }
+
+    #faq__title {
+        align-items: center !important;
+    }
+
+    #rate {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+
+
+/* ------------- CARI MOBIL --------------*/
+
+select option[placeholder],
+select option {
+    font-size: 12px !important;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #5CB85F !important;
+}
+
+
+.form-select#driverType option,
+.form-select#pickUpTime option {
+    font-weight: bold;
+    line-height: 10px;
+}
+
+.form-select#driverType option:hover,
+.form-select#driverType option:checked,
+.form-select#pickUpTime option:hover,
+.form-select#pickUpTime option:checked {
+    background: #C9E7CA !important;
+    color: #5CB85F !important;
+}
+
+#cari_mobil_container {
+    z-index: 99 !important;
+    background-color: #ffffff;
+}
+
+button {
+    border: unset;
+    padding: unset;
+    margin: unset;
+}
+
+#card-car {
+    box-shadow: 0px 0px 4px 0px #00000026 !important;
+}
+
+#cars-container .col-lg-3 {
+    width: 30% !important;
+}
+
+#btn_cari_mobil:hover {
+    background-color: #17831b;
+}
+
+#cars-container {
+    margin-top: 50px;
+}
+
+#car-name {
+    font-size: 14px;
+}
+
+#car-rent {
+    font-size: 16px;
+}
+
+.list-group.car-list li {
+    border: 0;
+}
+
+#img-car {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 222px;
+    width: 100%;
+}
+
+#btnCariMobil {
+    margin-top: 10px;
+}
+
+.form-select#pickUpTime {
+    background-image: url('../assets/images/fi_clock.svg') !important;
+}
+
+
+
+/* ------------------------------- CH 4 --------------------- */
+a.list-group-item {
+    font-size: 12px !important;
+}
+
+#sidebar_menu,
+#sidebar_submenu {
+    min-height: 100vh !important;
+}
+
+#logo_admin {
+    background-color: #CFD4ED;
+
+    width: 34px;
+    height: 34px;
+}
+
+#logo_admin-menu {
+    background-color: #CFD4ED;
+
+    width: 100px;
+    height: 34px;
+}
+
+.list-group a img {
+    width: 24px;
+    height: 24px;
+}
+
+.list-group a p {
+    font-size: 12px;
+}
