@@ -45,6 +45,24 @@ h1 {
     font-weight: bold;
 }
 
+.submenu_active {
+    background-color: #CFD4ED !important;
+}
+
+#sidebar_submenu .list-group a {
+    background-color: transparent;
+}
+
+.sidebar_menu-menu {
+    background-color: transparent;
+}
+
+.sidebar_menu-menu-active {
+    background-color: #ffffff56;
+    font-weight: bold !important;
+
+}
+
 
 /* custom component */
 nav a.navbar-brand,
@@ -237,13 +255,21 @@ button {
 
 
 /* ------------------------------- CH 4 --------------------- */
-a.list-group-item {
+#main_menu a {
     font-size: 12px !important;
 }
 
 #sidebar_menu,
 #sidebar_submenu {
     min-height: 100vh !important;
+}
+
+#sidebar_menu {
+    width: 70px !important;
+}
+
+#sidebar_submenu {
+    width: 220px !important;
 }
 
 #logo_admin {
@@ -260,12 +286,18 @@ a.list-group-item {
     height: 34px;
 }
 
-.list-group a img {
+#main_menu a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#main_menu a img {
     width: 24px;
     height: 24px;
 }
 
-.list-group a p {
+#main_menu a p {
     font-size: 12px;
 }
 

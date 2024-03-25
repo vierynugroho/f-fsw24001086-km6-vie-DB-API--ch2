@@ -1,301 +1,302 @@
 <!--! endpoint: /admin/cars/list-car  -->
 <%- include('../../components/html_header.ejs') %>
 
-<aside
-	class="collapse collapse-horizontal float-start"
-	id="sidebar_nav"
->
-	<div class="row justify-content-start align-items-center">
-		<div
-			class="col-4 bg-primary"
-			id="sidebar_menu"
-		>
-			<div class="list-group mt-2 rounded-0">
-				<a
-					href="/admin/dashboard"
-					class="list-group-item list-group-item-action text-white border-0 mx-auto rounded-0"
-					id="logo_admin"
-				></a>
-				<a
-					href="/admin/dashboard"
-					class="list-group-item list-group-item-action text-white border-0 rounded-0 bg-transparent d-flex flex-column"
+<div class="d-flex justify-content-between">
+	<aside
+		class="collapse show collapse-horizontal float-start"
+		id="sidebar_nav"
+	>
+		<div class="d-flex justify-content-start align-items-center">
+			<!--! MAIN MENU  -->
+			<div
+				class="bg-primary"
+				id="sidebar_menu"
+			>
+				<div
+					class="mt-2 rounded-0"
+					id="main_menu"
 				>
-					<img
-						src="/assets/images/fi_home.svg"
-						alt="err"
-					/>
-					<p>Dashboard</p>
-				</a>
-				<a
-					href="/admin/cars/list-car"
-					class="list-group-item list-group-item-action text-white border-0 rounded-0 bg-transparent d-flex flex-column"
-				>
-					<img
-						src="/assets/images/fi_cars.svg"
-						alt="err"
-					/>
-					<p>Cars</p>
-				</a>
+					<a
+						href="/admin/dashboard"
+						class="nav-link border-0 mx-auto rounded-0 my-2"
+						id="logo_admin"
+					></a>
+					<a
+						href="/admin/dashboard"
+						class="sidebar_menu-menu text-white nav-link border-0 rounded-0 d-flex pt-3 flex-column"
+					>
+						<img
+							src="/assets/images/fi_home.svg"
+							alt="err"
+						/>
+						<p>Dashboard</p>
+					</a>
+					<a
+						href="/admin/cars/list-car"
+						class="sidebar_menu-menu text-white nav-link border-0 rounded-0 d-flex pt-3 flex-column sidebar_menu-menu-active"
+					>
+						<img
+							src="/assets/images/fi_cars.svg"
+							alt="err"
+						/>
+						<p>Cars</p>
+					</a>
+				</div>
 			</div>
-		</div>
-		<div
-			class="col-8"
-			id="sidebar_submenu"
-		>
-			<div class="list-group mt-2">
-				<a
-					href="/admin/dashboard"
-					class="nav-item nav-link"
-				>
-					<li
-						class="list-group-item text-white border-0 text-center nav-link mx-auto"
+			<!--! SUBMENU  -->
+			<div
+				class="d-flex flex-column"
+				id="sidebar_submenu"
+			>
+				<a href="/admin/dashboard">
+					<div
+						class="text-center nav-link mx-auto mt-2"
 						id="logo_admin-menu"
-					></li>
+					></div>
 				</a>
 				<a
-					href="#"
-					class="list-group-item list-group-item-action bg-transparent border-0 fw-bold py-3"
+					href="cars"
+					class="border-0 rounded-0 fw-bold py-3 px-4 nav-link"
 					>Cars</a
 				>
 				<a
-					href="#"
-					class="list-group-item list-group-item-action bg-transparent border-0 fw-bold py-3"
-					>List Cars</a
+					href="list-car"
+					class="border-0 rounded-0 fw-bold py-3 px-4 nav-link submenu_active"
+					>List Car</a
 				>
 			</div>
 		</div>
-	</div>
-</aside>
+	</aside>
 
-<main>
-	<div class="container bg-transparent">
-		<!--! HEADER  -->
-		<div class="row">
-			<div
-				id="menu_left-header"
-				class="col-6 d-flex justify-content-start align-items-center"
-			>
-				<p>
-					<button
-						class="btn border-0 mt-2"
-						type="button"
-						data-bs-toggle="collapse"
-						data-bs-target="#sidebar_nav"
+	<main class="w-100">
+		<div class="container bg-transparent">
+			<!--! HEADER  -->
+			<div class="row">
+				<div
+					id="menu_left-header"
+					class="col-6 d-flex justify-content-start align-items-center"
+				>
+					<p>
+						<button
+							class="btn border-0 mt-2"
+							type="button"
+							data-bs-toggle="collapse"
+							data-bs-target="#sidebar_nav"
+							aria-expanded="false"
+							aria-controls="sidebar_nav"
+						>
+							<img
+								src="/assets/images/fi_menu.svg"
+								alt="hamburger"
+								class="img-fluid"
+							/>
+						</button>
+					</p>
+				</div>
+
+				<div
+					id="menu_right-header"
+					class="col-6 d-flex justify-content-end align-items-center gap-2"
+				>
+					<form
+						class="d-flex"
+						role="search"
+					>
+						<input
+							class="form-control rounded-0"
+							type="search"
+							placeholder="Search"
+							aria-label="Search"
+						/>
+						<button
+							class="btn btn-outline-primary rounded-0"
+							type="submit"
+						>
+							Search
+						</button>
+					</form>
+					<a
+						class="nav-link dropdown-toggle"
+						href="#"
+						role="button"
+						data-bs-toggle="dropdown"
 						aria-expanded="false"
-						aria-controls="sidebar_nav"
 					>
 						<img
-							src="/assets/images/fi_menu.svg"
-							alt="hamburger"
-							class="img-fluid"
+							src="https://t4.ftcdn.net/jpg/05/09/59/75/360_F_509597532_RKUuYsERhODmkxkZd82pSHnFtDAtgbzJ.jpg"
+							alt="img"
+							id="profile_img"
+							class="img-fluid rounded rounded-circle"
 						/>
-					</button>
-				</p>
+						Viery Nugroho
+					</a>
+					<ul class="dropdown-menu">
+						<li>
+							<a
+								class="dropdown-item"
+								href="#"
+								>Profile</a
+							>
+						</li>
+						<li>
+							<a
+								class="dropdown-item"
+								href="#"
+								>Settings</a
+							>
+						</li>
+						<hr class="dropdown-divider" />
+						<li>
+							<a
+								class="dropdown-item"
+								href="#"
+								>Logout</a
+							>
+						</li>
+					</ul>
+				</div>
 			</div>
 
-			<div
-				id="menu_right-header"
-				class="col-6 d-flex justify-content-end align-items-center gap-2"
-			>
-				<form
-					class="d-flex"
-					role="search"
-				>
-					<input
-						class="form-control rounded-0"
-						type="search"
-						placeholder="Search"
-						aria-label="Search"
-					/>
-					<button
-						class="btn btn-outline-primary rounded-0"
-						type="submit"
+			<!--! BREADCRUMB  -->
+			<div class="d-flex justify-content-between">
+				<nav class="breadcrumb">
+					<p class="breadcrumb-item fw-bold">Cars</p>
+					<span
+						class="breadcrumb-item active"
+						aria-current="page"
+						>List Car</span
 					>
-						Search
-					</button>
-				</form>
-				<a
-					class="nav-link dropdown-toggle"
-					href="#"
-					role="button"
-					data-bs-toggle="dropdown"
-					aria-expanded="false"
-				>
-					<img
-						src="https://t4.ftcdn.net/jpg/05/09/59/75/360_F_509597532_RKUuYsERhODmkxkZd82pSHnFtDAtgbzJ.jpg"
-						alt="img"
-						id="profile_img"
-						class="img-fluid rounded rounded-circle"
-					/>
-					Viery Nugroho
-				</a>
-				<ul class="dropdown-menu">
-					<li>
+				</nav>
+			</div>
+
+			<!--! CONTENT HEADER  -->
+			<div class="d-flex justify-content-between align-items-center">
+				<div class="content_header-title">
+					<h5 class="fw-bold">List Cars</h5>
+				</div>
+				<div class="content_header-button">
+					<a
+						href="list-car/add"
+						class="d-block w-100 py-2 px-4 nav-link rounded-2 primary-color text-white fw-bold text-center"
+					>
+						<i
+							><img
+								src="/assets/images/fi_plus.svg"
+								alt="add-icon"
+						/></i>
+						Add New Car</a
+					>
+				</div>
+			</div>
+
+			<!--! CONTENT FILTER  -->
+			<div class="d-flex justify-content-start align-items-center">
+				<ul class="nav justify-content-center gap-2">
+					<li class="nav-item">
 						<a
-							class="dropdown-item"
-							href="#"
-							>Profile</a
+							class="nav-link py-2 rounded-2 primary-outline-nonactive <% if (capacity === undefined) { %>active<% } %>"
+							href="list-car"
+							aria-current="page"
+							>All</a
 						>
 					</li>
-					<li>
+					<li class="nav-item">
 						<a
-							class="dropdown-item"
-							href="#"
-							>Settings</a
+							class="nav-link py-2 rounded-2 primary-outline-nonactive <% if (capacity === '2') { %>active<% } %>"
+							href="list-car?capacity=2"
+							>Small</a
 						>
 					</li>
-					<hr class="dropdown-divider" />
-					<li>
+					<li class="nav-item">
 						<a
-							class="dropdown-item"
-							href="#"
-							>Logout</a
+							class="nav-link py-2 rounded-2 primary-outline-nonactive <% if (capacity === '4') { %>active<% } %>"
+							href="list-car?capacity=4"
+							>Medium</a
+						>
+					</li>
+					<li class="nav-item">
+						<a
+							class="nav-link py-2 rounded-2 primary-outline-nonactive <% if (capacity === '6') { %>active<% } %>"
+							href="list-car?capacity=6"
+							>Large</a
 						>
 					</li>
 				</ul>
 			</div>
-		</div>
 
-		<!--! BREADCRUMB  -->
-		<div class="d-flex justify-content-between">
-			<nav class="breadcrumb">
-				<p class="breadcrumb-item fw-bold">Cars</p>
-				<span
-					class="breadcrumb-item active"
-					aria-current="page"
-					>List Car</span
-				>
-			</nav>
-		</div>
+			<!--! CONTENT -->
+			<div class="d-flex justify-content-center-align-items-center">
+				<div class="row m-3 mx-auto d-flex justify-content-evenly">
+					<% cars.map((car)=>{ %>
 
-		<!--! CONTENT HEADER  -->
-		<div class="d-flex justify-content-between align-items-center">
-			<div class="content_header-title">
-				<h5 class="fw-bold">List Cars</h5>
-			</div>
-			<div class="content_header-button">
-				<a
-					href="list-car/add"
-					class="d-block w-100 py-2 px-4 nav-link rounded-2 primary-color text-white fw-bold text-center"
-				>
-					<i
-						><img
-							src="/assets/images/fi_plus.svg"
-							alt="add-icon"
-					/></i>
-					Add New Car</a
-				>
-			</div>
-		</div>
-
-		<!--! CONTENT FILTER  -->
-		<div class="d-flex justify-content-start align-items-center">
-			<ul class="nav justify-content-center gap-2">
-				<li class="nav-item">
-					<a
-						class="nav-link py-2 rounded-2 primary-outline-nonactive <% if (capacity === undefined) { %>active<% } %>"
-						href="list-car"
-						aria-current="page"
-						>All</a
+					<div
+						class="col-4 card border-0 mt-4"
+						id="card-car"
 					>
-				</li>
-				<li class="nav-item">
-					<a
-						class="nav-link py-2 rounded-2 primary-outline-nonactive <% if (capacity === '2') { %>active<% } %>"
-						href="list-car?capacity=2"
-						>Small</a
-					>
-				</li>
-				<li class="nav-item">
-					<a
-						class="nav-link py-2 rounded-2 primary-outline-nonactive <% if (capacity === '4') { %>active<% } %>"
-						href="list-car?capacity=4"
-						>Medium</a
-					>
-				</li>
-				<li class="nav-item">
-					<a
-						class="nav-link py-2 rounded-2 primary-outline-nonactive <% if (capacity === '6') { %>active<% } %>"
-						href="list-car?capacity=6"
-						>Large</a
-					>
-				</li>
-			</ul>
-		</div>
-
-		<!--! CONTENT -->
-		<div class="d-flex justify-content-center-align-items-center">
-			<div class="row m-3 mx-auto d-flex justify-content-evenly">
-				<% cars.map((car)=>{ %>
-
-				<div
-					class="col-4 card border-0 mt-4"
-					id="card-car"
-				>
-					<div class="card-body h-100">
-						<img
-							class="img-fluid"
-							id="img-car"
-							src="/assets/<%- car.image %>"
-							alt="<%- car.name %>"
-						/>
-						<h2
-							class="card-title fw-bold pt-2"
-							id="car-name"
-						>
-							<%- car.name %>
-						</h2>
-						<h4
-							class="card-sub-title fw-bold"
-							id="car-rent"
-						>
-							<%- 'Rp. ' + car.rentPerDay + '/ hari' %>
-						</h4>
-						<i
-							><img
-								src="/assets/images/fi_clock.svg"
-								alt="clock-icon"
-						/></i>
-						<%- car.updatedAt %>
-					</div>
-					<div class="card-footer border-0">
-						<div class="d-flex gap-2">
-							<form
-								action="/list-car/delete/<%- car.id %>"
-								method="post"
-								class="d-block w-100 py-2 nav-link rounded-2 danger-outline fw-bold text-center"
+						<div class="card-body h-100">
+							<img
+								class="img-fluid"
+								id="img-car"
+								src="/assets/<%- car.image %>"
+								alt="<%- car.name %>"
+							/>
+							<h2
+								class="card-title fw-bold pt-2"
+								id="car-name"
 							>
+								<%- car.name %>
+							</h2>
+							<h4
+								class="card-sub-title fw-bold"
+								id="car-rent"
+							>
+								<%- 'Rp. ' + car.rentPerDay + '/ hari' %>
+							</h4>
+							<i
+								><img
+									src="/assets/images/fi_clock.svg"
+									alt="clock-icon"
+							/></i>
+							<%- car.updatedAt %>
+						</div>
+						<div class="card-footer border-0">
+							<div class="d-flex gap-2">
+								<form
+									action="/list-car/delete/<%- car.id %>"
+									method="post"
+									class="d-block w-100 py-2 nav-link rounded-2 danger-outline fw-bold text-center"
+								>
+									<a
+										href="list-car/<%- car.id %>"
+										class="nav-link"
+									>
+										<i
+											><img
+												src="/assets/images/fi_trash-2.svg"
+												alt="user-icon"
+										/></i>
+										Delete</a
+									>
+								</form>
 								<a
-									href="list-car/<%- car.id %>"
-									class="nav-link"
+									href="list-car/edit/<%- car.id %>"
+									class="d-block w-100 py-2 nav-link rounded-2 success-color text-white fw-bold text-center"
 								>
 									<i
 										><img
-											src="/assets/images/fi_trash-2.svg"
+											src="/assets/images/fi_edit.svg"
 											alt="user-icon"
 									/></i>
-									Delete</a
+									Edit</a
 								>
-							</form>
-							<a
-								href="list-car/edit/<%- car.id %>"
-								class="d-block w-100 py-2 nav-link rounded-2 success-color text-white fw-bold text-center"
-							>
-								<i
-									><img
-										src="/assets/images/fi_edit.svg"
-										alt="user-icon"
-								/></i>
-								Edit</a
-							>
+							</div>
 						</div>
 					</div>
-				</div>
 
-				<% }) %>
+					<% }) %>
+				</div>
 			</div>
 		</div>
-	</div>
-</main>
-
+	</main>
+</div>
 <%- include('../../components/html_footer.ejs') %>
