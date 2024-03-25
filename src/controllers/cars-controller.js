@@ -128,17 +128,24 @@ const deleteCar = async (req, res) => {
 const getAdminCarsPage = async (req, res) => {
 	try {
 		const capacity_query = req.query.capacity || '0';
+		const searchTerm = req.query.search || '';
 
 		const cars = await Car.findAll({
 			where: {
 				capacity: {
 					[Op.gte]: capacity_query,
 				},
+				name: {
+					[Op.iLike]: `%${searchTerm}%`,
+				},
 			},
 		});
 
+		console.log(searchTerm);
+
 		const data = {
 			capacity: req.query.capacity,
+			searchTerm,
 			cars,
 		};
 
@@ -165,6 +172,7 @@ const getAddCarPage = async (req, res) => {
 const getEditCarPage = async (req, res) => {
 	try {
 		const id = req.params.id;
+
 		const car = await Car.findByPk(id);
 		const data = {
 			car,

@@ -17,7 +17,7 @@
 					id="main_menu"
 				>
 					<a
-						href="/admin/dashboard"
+						href="/"
 						class="nav-link border-0 mx-auto rounded-0 my-2"
 						id="logo_admin"
 					></a>
@@ -101,16 +101,21 @@
 					<form
 						class="d-none d-md-flex"
 						role="search"
+						method="post"
+						id="search-form"
 					>
 						<input
 							class="form-control rounded-0"
 							type="search"
-							placeholder="Search"
+							placeholder="Search By Car Name"
 							aria-label="Search"
+							id="search-input"
+							value="<%- searchTerm %>"
 						/>
 						<button
 							class="btn btn-outline-primary rounded-0"
 							type="submit"
+							id="search-btn"
 						>
 							Search
 						</button>
@@ -177,7 +182,7 @@
 				<div class="content_header-button">
 					<a
 						href="list-car/add"
-						class="d-block w-100 py-2 px-4 nav-link rounded-2 primary-color text-white fw-bold text-center"
+						class="d-block w-100 py-2 px-4 nav-link rounded-0 primary-color text-white fw-bold text-center"
 					>
 						<i
 							><img
@@ -194,7 +199,7 @@
 				<ul class="nav justify-content-center gap-2">
 					<li class="nav-item">
 						<a
-							class="nav-link py-2 rounded-2 primary-outline-nonactive <% if (capacity === undefined) { %>active<% } %>"
+							class="nav-link py-2 rounded-0 primary-outline-nonactive <% if (capacity === undefined) { %>active<% } %>"
 							href="list-car"
 							aria-current="page"
 							>All</a
@@ -202,21 +207,21 @@
 					</li>
 					<li class="nav-item">
 						<a
-							class="nav-link py-2 rounded-2 primary-outline-nonactive <% if (capacity === '2') { %>active<% } %>"
+							class="nav-link py-2 rounded-0 primary-outline-nonactive <% if (capacity === '2') { %>active<% } %>"
 							href="list-car?capacity=2"
 							>Small</a
 						>
 					</li>
 					<li class="nav-item">
 						<a
-							class="nav-link py-2 rounded-2 primary-outline-nonactive <% if (capacity === '4') { %>active<% } %>"
+							class="nav-link py-2 rounded-0 primary-outline-nonactive <% if (capacity === '4') { %>active<% } %>"
 							href="list-car?capacity=4"
 							>Medium</a
 						>
 					</li>
 					<li class="nav-item">
 						<a
-							class="nav-link py-2 rounded-2 primary-outline-nonactive <% if (capacity === '6') { %>active<% } %>"
+							class="nav-link py-2 rounded-0 primary-outline-nonactive <% if (capacity === '6') { %>active<% } %>"
 							href="list-car?capacity=6"
 							>Large</a
 						>
@@ -226,8 +231,8 @@
 
 			<!--! CONTENT -->
 			<div class="d-flex justify-content-center-align-items-center">
-				<div class="row m-3 mx-auto d-flex justify-content-evenly">
-					<% cars.map((car)=>{ %>
+				<div class="row m-3 mx-auto d-flex justify-content-evenly w-100">
+					<% if(cars.length > 0){ %> <% cars.map((car)=>{ %>
 
 					<div
 						class="col-12 col-md-6 col-lg-4 card border-0 mt-4"
@@ -293,10 +298,32 @@
 						</div>
 					</div>
 
-					<% }) %>
+					<% }) %> <% } else{%>
+					<div
+						class="alert alert-danger text-center fw-bold mt-2 w-100"
+						role="alert"
+						style="width: 50vw !important"
+					>
+						Mobil Tidak Tersedia!
+					</div>
+					<% } %>
 				</div>
 			</div>
 		</div>
 	</main>
 </div>
+
+<script>
+	const searchForm = document.querySelector('#search-form');
+	const searchInput = document.querySelector('#search-input');
+	const resultsContainer = document.querySelector('.results-container');
+
+	searchForm.addEventListener('submit', async (e) => {
+		e.preventDefault();
+
+		const searchTerm = searchInput.value;
+
+		window.location.href = `http://localhost:2000/admin/cars/list-car?search=${searchTerm}`;
+	});
+</script>
 <%- include('../../components/html_footer.ejs') %>
