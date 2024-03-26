@@ -1,7 +1,10 @@
-const { Car } = require('../databases/models');
 const Joi = require('joi');
+const multer = require('multer');
 const { randomUUID } = require('crypto');
 const { Op } = require('sequelize');
+
+const { Car } = require('../databases/models');
+const { image } = require('../libs/multer');
 
 //! schema validation data
 const carSchema = Joi.object().keys({
@@ -55,6 +58,8 @@ const createCar = async (req, res) => {
 	try {
 		const data = req.body;
 		data.id = randomUUID();
+		data.image = './images/' + req.file.originalname;
+
 		const car = await Car.create(data);
 
 		res.status(201).json({

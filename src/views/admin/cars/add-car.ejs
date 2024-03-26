@@ -121,13 +121,14 @@
 			</div>
 
 			<!--! CONTENT -->
-			<div class="container">
-				<div class="row">
-					<div class="col-6">
-						<form
-							method="post"
-							enctype="multipart/form-data"
-						>
+			<form
+				method="post"
+				action="/api/cars"
+				enctype="multipart/form-data"
+			>
+				<div class="container">
+					<div class="row">
+						<div class="col-6">
 							<!--! name  -->
 							<div class="row">
 								<div class="col-4">
@@ -145,6 +146,7 @@
 											name="name"
 											id="name"
 											placeholder="Avanza"
+											required
 										/>
 									</div>
 								</div>
@@ -166,6 +168,7 @@
 											name="rentPerDay"
 											id="rentPerDay"
 											placeholder="Rp. 0 -"
+											required
 										/>
 									</div>
 								</div>
@@ -185,6 +188,7 @@
 											class="form-select"
 											name="size"
 											id="size"
+											required
 										>
 											<option selected>ukuran</option>
 											<option value="2">Small</option>
@@ -198,7 +202,7 @@
 							<div class="row">
 								<div class="col-4">
 									<label
-										for="photo"
+										for="image"
 										class="form-label"
 										>Foto</label
 									>
@@ -209,8 +213,8 @@
 											<input
 												type="file"
 												class="form-control"
-												name="photo"
-												id="photo"
+												name="image"
+												id="image"
 											/>
 										</div>
 										<div
@@ -222,27 +226,27 @@
 									</div>
 								</div>
 							</div>
-						</form>
+						</div>
 					</div>
-				</div>
-				<div class="row position-fixed bottom-0 my-4">
-					<div class="col-6 d-flex gap-2">
-						<a
-							href="/admin/cars/list-car""
-							class="d-block py-2 px-3 nav-link rounded-0 primary-outline fw-bold text-center"
-						>
-							Cancel</a
-						>
+					<div class="row position-fixed bottom-0 my-4">
+						<div class="col-6 d-flex gap-2">
+							<a
+								href="/admin/cars/list-car"
+								class="d-block py-2 px-3 nav-link rounded-0 primary-outline fw-bold text-center"
+							>
+								Cancel</a
+							>
 
-						<a
-							href="list-car"
-							class="d-block  py-2 px-3 nav-link rounded-0 primary-color fw-bold text-center"
-						>
-							Save</a
-						>
+							<input
+								type="submit"
+								name="submit"
+								value="Save"
+								class="d-block py-2 px-3 nav-link rounded-0 primary-color fw-bold text-center"
+							/>
+						</div>
 					</div>
 				</div>
-			</div>
+			</form>
 		</div>
 	</main>
 </div>
