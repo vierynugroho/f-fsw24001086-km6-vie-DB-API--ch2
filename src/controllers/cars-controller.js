@@ -38,6 +38,10 @@ const getCarsById = async (req, res) => {
 		const id = req.params.id;
 		const car = await Car.findByPk(id);
 
+		if (!car) {
+			throw new Error('Car Not Found');
+		}
+
 		const data = {
 			car,
 		};
@@ -72,6 +76,8 @@ const createCar = async (req, res) => {
 			status: 'FAIL',
 			message: error.message,
 		});
+	} finally {
+		res.redirect('list-car');
 	}
 };
 
@@ -94,10 +100,14 @@ const updateCar = async (req, res) => {
 			}
 		);
 
+		if (!car[0]) {
+			throw new Error('Car Not Found');
+		}
+
 		res.status(200).json({
 			status: 'OK',
 			message: 'UPDATE car success!',
-			data: car,
+			data: req.body,
 		});
 	} catch (error) {
 		res.status(400).json({
@@ -110,6 +120,12 @@ const updateCar = async (req, res) => {
 const deleteCar = async (req, res) => {
 	try {
 		const id = req.params.id;
+
+		const findCar = await Car.findByPk(id);
+
+		if (!findCar) {
+			throw new Error('Car Not Found');
+		}
 
 		await Car.destroy({
 			where: {
