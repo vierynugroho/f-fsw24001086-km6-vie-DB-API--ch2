@@ -6,6 +6,9 @@
 
 ![ERD](./ERD.jpg)
 
+# Postman Docs
+![docs here](https://documenter.getpostman.com/view/22814931/2sA35EY2XU)
+
 # Endpoint
 
 ### API
