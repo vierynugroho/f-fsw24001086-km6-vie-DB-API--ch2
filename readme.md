@@ -4,10 +4,15 @@
 
 # Database Diagram
 
-![ERD](./ERD.jpg)
+- navicat
+  ![ERD](./ERD.jpg)
+
+- dbdiagram
+  ![ERD](./dbdiagram_cars.png)
 
 # Postman Docs
-![docs here](https://documenter.getpostman.com/view/22814931/2sA35EY2XU)
+
+[docs here](https://documenter.getpostman.com/view/22814931/2sA35EY2XU)
 
 # Endpoint
 
