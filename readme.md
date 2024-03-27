@@ -4,11 +4,10 @@
 
 # Database Diagram
 
-- navicat
-  ![ERD](./ERD.jpg)
-
-- dbdiagram
-  ![ERD](./dbdiagram_cars.png)
+<p align='center'>
+<img style='width: 45%' src='./ERD.jpg' alt='ERD Navicat' title='from navicat'>
+<img style='width: 45%' src='./dbdiagram_cars.png' alt='ERD DBDiagram' title='from DB Diagram IO'>
+</p>
 
 # Postman Docs
 
