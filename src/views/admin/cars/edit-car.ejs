@@ -121,13 +121,14 @@
 			</div>
 
 			<!--! CONTENT -->
-			<div class="container">
-				<div class="row">
-					<div class="col-6">
-						<form
-							method="post"
-							enctype="multipart/form-data"
-						>
+			<form
+				action="/admin/cars/list-car/edit/<%- car.id %>"
+				method="post"
+				enctype="multipart/form-data"
+			>
+				<div class="container">
+					<div class="row">
+						<div class="col-6">
 							<!--! name  -->
 							<div class="row">
 								<div class="col-4">
@@ -144,7 +145,8 @@
 											class="form-control"
 											name="name"
 											id="name"
-											placeholder="Avanza"
+											value="<%-car.name%>"
+											required
 										/>
 									</div>
 								</div>
@@ -161,11 +163,12 @@
 								<div class="col-8">
 									<div class="mb-3">
 										<input
-											type="text"
+											type="number"
 											class="form-control"
 											name="rentPerDay"
 											id="rentPerDay"
-											placeholder="Rp. 0 -"
+											value="<%-car.rentPerDay%>"
+											min="0"
 										/>
 									</div>
 								</div>
@@ -174,7 +177,7 @@
 							<div class="row">
 								<div class="col-4">
 									<label
-										for="size"
+										for="capacity"
 										class="form-label"
 										>Ukuran</label
 									>
@@ -183,10 +186,16 @@
 									<div class="mb-3">
 										<select
 											class="form-select"
-											name="size"
-											id="size"
+											name="capacity"
+											id="capacity"
 										>
-											<option selected>ukuran</option>
+											<option
+												selected
+												hidden
+												value="<%-car.capacity%>"
+											>
+												<% if(car.capacity === 2){ %> Small <% } else if(car.capacity === 4){ %> Medium <% } else if(car.capacity === 6) { %> Large <% } %>
+											</option>
 											<option value="2">Small</option>
 											<option value="4">Medium</option>
 											<option value="6">Large</option>
@@ -222,28 +231,28 @@
 									</div>
 								</div>
 							</div>
-						</form>
+						</div>
 					</div>
-				</div>
-				<div class="row position-fixed bottom-0 my-4">
-					<div class="col-6 d-flex gap-2">
-						<a
-							href="/admin/cars/list-car"
-							class="d-block py-2 px-3 nav-link rounded-0 primary-outline fw-bold text-center"
-						>
-							Cancel</a
-						>
+					<div class="row position-fixed bottom-0 my-4">
+						<div class="col-6 d-flex gap-2">
+							<a
+								href="/admin/cars/list-car"
+								class="d-block py-2 px-3 nav-link rounded-0 primary-outline fw-bold text-center"
+							>
+								Cancel</a
+							>
 
-						<a
-							href="list-car"
-							class="d-block py-2 px-3 nav-link rounded-0 primary-color fw-bold text-center"
-						>
-							Save</a
-						>
+							<input
+								type="submit"
+								value="Save"
+								class="d-block py-2 px-3 nav-link rounded-0 primary-color fw-bold text-center"
+							/>
+						</div>
 					</div>
 				</div>
-			</div>
+			</form>
 		</div>
 	</main>
 </div>
+
 <%- include('../../components/html_footer.ejs') %>

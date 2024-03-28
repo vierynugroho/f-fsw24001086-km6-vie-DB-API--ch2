@@ -122,10 +122,9 @@
 
 			<!--! CONTENT -->
 			<form
+				action="/admin/cars/list-car/add"
 				method="post"
-				action="/api/cars"
 				enctype="multipart/form-data"
-				id="add-form"
 			>
 				<div class="container">
 					<div class="row">
@@ -169,6 +168,7 @@
 											name="rentPerDay"
 											id="rentPerDay"
 											placeholder="Rp. 0 -"
+											min="0"
 										/>
 									</div>
 								</div>

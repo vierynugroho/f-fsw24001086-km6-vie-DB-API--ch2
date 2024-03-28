@@ -2,6 +2,23 @@
 
 <%- include('../../components/html_header.ejs') -%>
 
+<!--! MESSAGE  -->
+<% if(message != ''){ %>
+<div
+	class="alert alert-success alert-dismissible fade show w-25 position-absolute mt-5"
+	style="position: absolute; left: 50%; transform: translate(-50%, -50%)"
+	role="alert"
+>
+	<button
+		type="button"
+		class="btn-close"
+		data-bs-dismiss="alert"
+		aria-label="Close"
+	></button>
+	<strong>Berhasil</strong> <%-message%>
+</div>
+
+<% } %>
 <div class="d-flex justify-content-between">
 	<aside
 		class="collapse show collapse-horizontal float-start"
@@ -268,21 +285,21 @@
 						<div class="card-footer border-0">
 							<div class="d-flex gap-2">
 								<form
-									action="/list-car/delete/<%- car.id %>"
+									action="list-car/delete/<%- car.id %>"
 									method="post"
-									class="d-block w-100 py-2 nav-link rounded-2 danger-outline fw-bold text-center"
+									class="w-100"
 								>
-									<a
-										href="list-car/<%- car.id %>"
-										class="nav-link"
+									<button
+										type="submit"
+										class="nav-link d-block py-2 nav-link rounded-2 danger-outline fw-bold text-center w-100"
 									>
 										<i
 											><img
 												src="/assets/images/fi_trash-2.svg"
 												alt="user-icon"
 										/></i>
-										Delete</a
-									>
+										Delete
+									</button>
 								</form>
 								<a
 									href="list-car/edit/<%- car.id %>"

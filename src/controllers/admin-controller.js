@@ -18,8 +18,7 @@ const carSchema = Joi.object().keys({
 	updatedAt: Joi.date().required(),
 });
 
-//! general
-const getAllCars = async (req, res) => {
+const getAdminCarsPage = async (req, res) => {
 	try {
 		const capacity_value = req.query.capacity || '0';
 		const searchTerm = req.query.search || '';
@@ -60,44 +59,28 @@ const getAllCars = async (req, res) => {
 
 		const cars = await Car.findAll(query);
 
-		if (cars.length === 0) {
-			throw Error('Not Found');
-		}
+		const data = {
+			capacity: req.query.capacity,
+			searchTerm,
+			cars,
+			message: req.flash('message', ''),
+		};
 
-		res.status(200).json({
-			status: 'OK',
-			totalData: cars.length,
-			requestAt: req.requestTime,
-			data: cars,
-		});
+		res.render('admin/cars/index', data);
 	} catch (error) {
 		res.status(500).json({
-			status: 'FAILED',
+			status: 'FAIL',
 			message: error.message,
 		});
 	}
 };
 
-const getCarsById = async (req, res) => {
+const getAddCarPage = async (req, res) => {
 	try {
-		const id = req.params.id;
-		const car = await Car.findByPk(id);
-
-		if (!car) {
-			throw new Error('Car Not Found');
-		}
-
-		const data = {
-			car,
-		};
-
-		res.status(200).json({
-			status: 'OK',
-			data: data,
-		});
+		res.render('admin/cars/add-car');
 	} catch (error) {
-		res.status(404).json({
-			status: 'FAILED',
+		res.status(500).json({
+			status: 'FAIL',
 			message: error.message,
 		});
 	}
@@ -109,13 +92,10 @@ const createCar = async (req, res) => {
 		data.id = randomUUID();
 		data.image = './images/' + req.file.originalname;
 
-		const car = await Car.create(data);
+		await Car.create(data);
 
-		res.status(201).json({
-			status: 'OK',
-			message: 'CREATE car success!',
-			data: car,
-		});
+		req.flash('message', 'Berhasil Ditambah!');
+		res.redirect('/admin/cars/list-car');
 	} catch (error) {
 		res.status(400).json({
 			status: 'FAIL',
@@ -124,36 +104,42 @@ const createCar = async (req, res) => {
 	}
 };
 
-const updateCar = async (req, res) => {
+const getEditCarPage = async (req, res) => {
 	try {
-		const id = req.params.id;
-		const { name, rentPerDay, capacity, image } = req.body;
+		const car = await Car.findByPk(req.params.id);
 
-		const car = await Car.update(
-			{
-				name,
-				rentPerDay,
-				capacity,
-				image,
-			},
-			{
-				where: {
-					id,
-				},
-			}
-		);
-
-		if (!car[0]) {
-			throw new Error('Car Not Found');
-		}
-
-		res.status(200).json({
-			status: 'OK',
-			message: 'UPDATE car success!',
-			data: req.body,
-		});
+		res.render('admin/cars/edit-car', { car });
 	} catch (error) {
-		res.status(400).json({
+		res.status(500).json({
+			status: 'FAIL',
+			message: error.message,
+		});
+	}
+};
+
+const editCar = async (req, res) => {
+	try {
+		await Car.update(req.body, {
+			where: {
+				id: req.params.id,
+			},
+		});
+		console.log(req.body);
+
+		req.flash('message', 'Data Berhasil Diperbarui!');
+		res.redirect('/admin/cars/list-car');
+	} catch (error) {
+		res.render('error.ejs', {
+			message: error.message,
+		});
+	}
+};
+
+const getCarsDetailPage = async (req, res) => {
+	try {
+		res.render('admin/cars/car-detail');
+	} catch (error) {
+		res.status(500).json({
 			status: 'FAIL',
 			message: error.message,
 		});
@@ -162,36 +148,27 @@ const updateCar = async (req, res) => {
 
 const deleteCar = async (req, res) => {
 	try {
-		const id = req.params.id;
-
-		const findCar = await Car.findByPk(id);
-
-		if (!findCar) {
-			throw new Error('Car Not Found');
-		}
-
 		await Car.destroy({
 			where: {
-				id,
+				id: req.params.id,
 			},
 		});
 
-		res.status(200).json({
-			status: 'OK',
-			message: 'DELETE car success!',
-		});
+		req.flash('message', 'Data Berhasil Dihapus!');
+		res.redirect('/admin/cars/list-car');
 	} catch (error) {
-		res.status(400).json({
-			status: 'FAIL',
+		res.render('error.ejs', {
 			message: error.message,
 		});
 	}
 };
 
 module.exports = {
-	getAllCars,
-	getCarsById,
+	getAdminCarsPage,
+	getCarsDetailPage,
 	createCar,
-	updateCar,
+	getAddCarPage,
+	getEditCarPage,
 	deleteCar,
+	editCar,
 };
