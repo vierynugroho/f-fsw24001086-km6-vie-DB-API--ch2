@@ -1,5 +1,6 @@
 <!--! endpoint: /admin/cars/list-car  -->
-<%- include('../../components/html_header.ejs') %>
+
+<%- include('../../components/html_header.ejs') -%>
 
 <div class="d-flex justify-content-between">
 	<aside
@@ -326,4 +327,5 @@
 		window.location.href = `http://localhost:2000/admin/cars/list-car?search=${searchTerm}`;
 	});
 </script>
+
 <%- include('../../components/html_footer.ejs') %>

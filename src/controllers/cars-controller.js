@@ -1,5 +1,6 @@
 const Joi = require('joi');
 const multer = require('multer');
+
 const { randomUUID } = require('crypto');
 const { Op } = require('sequelize');
 
@@ -20,14 +21,58 @@ const carSchema = Joi.object().keys({
 //! general
 const getAllCars = async (req, res) => {
 	try {
-		const cars = await Car.findAll();
+		const capacity_value = req.query.capacity || '0';
+		const searchTerm = req.query.search || '';
+
+		const queryObj = { ...req.query };
+		const excludedColumns = ['page', 'sort', 'limit'];
+
+		excludedColumns.forEach((el) => delete queryObj[el]);
+
+		const queryStr = JSON.stringify(queryObj);
+
+		//! Advance Filter
+		const query = {
+			[Op.or]: [{ gte: { ...JSON.parse(queryStr) } }, { gt: { ...JSON.parse(queryStr) } }, { lte: { ...JSON.parse(queryStr) } }, { lt: { ...JSON.parse(queryStr) } }],
+		};
+
+		//! Sorting
+		const sortBy = req.query.sort ? req.query.sort.split(',').join(' ') : 'capacity';
+		query.order = [sortBy];
+
+		//! Search by capacity
+		query.where = {
+			capacity: {
+				[Op.gte]: capacity_value,
+			},
+			name: {
+				[Op.iLike]: `%${searchTerm}%`,
+			},
+		};
+
+		//! Pagination
+		const page = req.query.page * 1 || 1;
+		const limit = req.query.limit * 1 || 10;
+		const offset = (page - 1) * limit;
+
+		query.offset = offset;
+		query.limit = limit;
+
+		const cars = await Car.findAll(query);
+
+		if (cars.length === 0) {
+			throw Error('Not Found');
+		}
 
 		res.status(200).json({
+			status: 'OK',
+			totalData: cars.length,
+			requestAt: req.requestTime,
 			data: cars,
 		});
 	} catch (error) {
 		res.status(500).json({
-			status: 'FAIL',
+			status: 'FAILED',
 			message: error.message,
 		});
 	}
@@ -76,8 +121,6 @@ const createCar = async (req, res) => {
 			status: 'FAIL',
 			message: error.message,
 		});
-	} finally {
-		res.redirect('list-car');
 	}
 };
 

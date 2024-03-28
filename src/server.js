@@ -5,8 +5,8 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 //! ------------- declaration var config -------------
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 2000;
 
 app.listen(PORT, () => {
-	console.log(`Yohoo! running in http://localhost:${PORT}`);
+	console.log(`Ramadhan Kareem! http://localhost:${PORT}`);
 });

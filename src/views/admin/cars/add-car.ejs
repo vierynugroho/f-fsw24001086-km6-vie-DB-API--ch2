@@ -125,6 +125,7 @@
 				method="post"
 				action="/api/cars"
 				enctype="multipart/form-data"
+				id="add-form"
 			>
 				<div class="container">
 					<div class="row">
@@ -163,12 +164,11 @@
 								<div class="col-8">
 									<div class="mb-3">
 										<input
-											type="text"
+											type="number"
 											class="form-control"
 											name="rentPerDay"
 											id="rentPerDay"
 											placeholder="Rp. 0 -"
-											required
 										/>
 									</div>
 								</div>
@@ -188,9 +188,13 @@
 											class="form-select"
 											name="capacity"
 											id="capacity"
-											required
 										>
-											<option selected>ukuran</option>
+											<option
+												selected
+												hidden
+											>
+												ukuran
+											</option>
 											<option value="2">Small</option>
 											<option value="4">Medium</option>
 											<option value="6">Large</option>
@@ -239,7 +243,6 @@
 
 							<input
 								type="submit"
-								name="submit"
 								value="Save"
 								class="d-block py-2 px-3 nav-link rounded-0 primary-color fw-bold text-center"
 							/>
@@ -250,4 +253,5 @@
 		</div>
 	</main>
 </div>
+
 <%- include('../../components/html_footer.ejs') %>
