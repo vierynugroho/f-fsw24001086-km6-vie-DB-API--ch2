@@ -284,23 +284,77 @@
 						</div>
 						<div class="card-footer border-0">
 							<div class="d-flex gap-2">
-								<form
-									action="list-car/delete/<%- car.id %>"
-									method="post"
-									class="w-100"
+								<!-- Button Modal -->
+								<button
+									type="button"
+									class="nav-link d-block py-2 nav-link rounded-2 danger-outline fw-bold text-center w-100"
+									data-bs-toggle="modal"
+									data-bs-target="#deleteCar<%- car.id %>"
 								>
-									<button
-										type="submit"
-										class="nav-link d-block py-2 nav-link rounded-2 danger-outline fw-bold text-center w-100"
-									>
-										<i
-											><img
-												src="/assets/images/fi_trash-2.svg"
-												alt="user-icon"
-										/></i>
-										Delete
-									</button>
-								</form>
+									<i
+										><img
+											src="/assets/images/fi_trash-2.svg"
+											alt="user-icon"
+									/></i>
+									Delete
+								</button>
+								<!-- Modal Content -->
+								<div
+									class="modal fade"
+									id="deleteCar<%- car.id %>"
+									tabindex="-1"
+									aria-labelledby="deleteCarLabel"
+									aria-hidden="true"
+								>
+									<div class="modal-dialog modal-dialog-centered">
+										<div class="modal-content">
+											<div class="modal-body rounded bg-white text-center">
+												<div class="row">
+													<div class="col-12 d-flex justify-content-center align-items-center">
+														<img
+															src="/assets/images/delete_car_icon.svg"
+															alt="car_icon"
+															class="img-fluid"
+															style="width: 153px; height: 121px"
+														/>
+													</div>
+
+													<div class="col-12">
+														<h5 class="fw-bold">Menghapus Data Mobil</h5>
+													</div>
+													<div class="col-12">
+														<p>Setelah dihapus, data mobil tidak dapat dikembalikan. Yakin ingin menghapus?</p>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-6 d-flex justify-content-end align-items-center">
+														<form
+															action="list-car/delete/<%- car.id %>"
+															method="post"
+															class="w-50"
+															title="<%- car.name %>"
+														>
+															<button
+																type="submit"
+																class="d-block w-100 py-2 px-4 nav-link rounded primary-color text-white fw-bold text-center"
+															>
+																Ya
+															</button>
+														</form>
+													</div>
+													<div class="col-6 d-flex justify-content-start align-items-center">
+														<button
+															class="d-block w-50 py-2 px-4 nav-link rounded primary-outline primary-text fw-bold text-center"
+															data-bs-dismiss="modal"
+														>
+															Tidak
+														</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
 								<a
 									href="list-car/edit/<%- car.id %>"
 									class="d-block w-100 py-2 nav-link rounded-2 success-color text-white fw-bold text-center"

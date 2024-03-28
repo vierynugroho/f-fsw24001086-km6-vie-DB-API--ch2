@@ -36,19 +36,5 @@
 			integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
 			crossorigin="anonymous"
 		/>
-
-		<script>
-			fetch('http://localhost:2000/api/cars')
-				.then((response) => {
-					return response.json();
-				})
-				.then((data) => {
-					console.log(data.data);
-				})
-				.catch((error) => {
-					console.error(error);
-				});
-		</script>
 	</head>
-	<body></body>
-</html>
+	<body>

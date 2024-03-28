@@ -1,29 +1,26 @@
 const multer = require('multer');
 
-function generateFilter(props) {
-	let { allowedMimeTypes } = props;
-	return multer({
-		fileFilter: (req, file, callback) => {
-			if (!allowedMimeTypes.includes(file.mimetype)) {
-				const err = new Error(`Only ${allowedMimeTypes.join(', ')} allowed to upload!`);
-				return callback(err, false);
-			}
-			callback(null, true);
-		},
-		onError: (err, next) => {
-			next(err);
-		},
-	});
-}
+const allowedTypes = ['image/jpg', 'image/jpeg', 'image/png'];
 
-module.exports = {
-	image: generateFilter({
-		allowedMimeTypes: ['image/png', 'image/jpeg', 'image/jpg'],
-	}),
-	video: generateFilter({
-		allowedMimeTypes: ['video/x-msvideo', 'video/mp4', 'video/mpeg'],
-	}),
-	document: generateFilter({
-		allowedMimeTypes: ['application/pdf'],
-	}),
-};
+const storage = multer.diskStorage({
+	destination: (req, file, cb) => {
+		cb(null, './public/assets/images');
+	},
+	filename: (req, file, cb) => {
+		cb(null, Date.now() + file.originalname);
+	},
+	fileFilter: (req, file, cb) => {
+		if (allowedTypes.includes(file.mimetype)) {
+			cb(null, true);
+		} else {
+			throw Error(`Invalid MIME type! Allowed: ${allowedTypes}`);
+		}
+	},
+	limits: {
+		fileSize: 2 * 1024 * 1024, // 2MB
+	},
+});
+
+const upload = multer({ storage: storage }).single('image');
+
+module.exports = upload;

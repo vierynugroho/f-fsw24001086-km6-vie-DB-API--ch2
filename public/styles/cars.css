@@ -33,6 +33,10 @@ h1 {
     color: #0d28a6 !important;
 }
 
+.primary-text {
+    color: #0d28a6 !important;
+}
+
 .primary-outline-nonactive {
     border: #AEB7E1 1px solid;
     color: #AEB7E1 !important;

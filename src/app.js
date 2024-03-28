@@ -6,8 +6,6 @@ const bodyParser = require('body-parser');
 const router = require('./routes');
 const session = require('express-session');
 const flash = require('connect-flash');
-const multer = require('multer');
-const upload = multer();
 
 //! config
 const app = express();
@@ -50,10 +48,8 @@ app.get('/cars', (req, res) => {
 app.use(router);
 
 app.use((req, res) => {
-	res.status(404).json({
-		status: 'NOT FOUND',
-		message: '404 - Page Not Found',
-	});
+	const url = req.url;
+	res.render('errors/404', { url, code: 404 });
 });
 
 module.exports = app;

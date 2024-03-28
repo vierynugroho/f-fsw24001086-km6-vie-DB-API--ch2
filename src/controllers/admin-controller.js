@@ -1,22 +1,11 @@
 require('dotenv/config');
 
-const Joi = require('joi');
+const fs = require('fs');
 
 const { randomUUID } = require('crypto');
 const { Op } = require('sequelize');
-
 const { Car } = require('../databases/models');
-
-//! schema validation data
-const carSchema = Joi.object().keys({
-	id: Joi.string().required(),
-	name: Joi.string().required(),
-	rentPerDay: Joi.number().required(),
-	capacity: Joi.number().required(),
-	image: Joi.string().required(),
-	createdAt: Joi.date().required(),
-	updatedAt: Joi.date().required(),
-});
+const { createDataValidation, updateDataValidation } = require('../validations/car-validation');
 
 const getAdminCarsPage = async (req, res) => {
 	try {
@@ -68,8 +57,8 @@ const getAdminCarsPage = async (req, res) => {
 
 		res.render('admin/cars/index', data);
 	} catch (error) {
-		res.status(500).json({
-			status: 'FAIL',
+		res.render('errors/error.ejs', {
+			code: 500,
 			message: error.message,
 		});
 	}
@@ -79,8 +68,8 @@ const getAddCarPage = async (req, res) => {
 	try {
 		res.render('admin/cars/add-car');
 	} catch (error) {
-		res.status(500).json({
-			status: 'FAIL',
+		res.render('errors/error.ejs', {
+			code: 500,
 			message: error.message,
 		});
 	}
@@ -90,15 +79,15 @@ const createCar = async (req, res) => {
 	try {
 		const data = req.body;
 		data.id = randomUUID();
-		data.image = './images/' + req.file.originalname;
+		data.image = './images/' + req.file.filename;
 
 		await Car.create(data);
 
 		req.flash('message', 'Berhasil Ditambah!');
 		res.redirect('/admin/cars/list-car');
 	} catch (error) {
-		res.status(400).json({
-			status: 'FAIL',
+		res.render('errors/error.ejs', {
+			code: 400,
 			message: error.message,
 		});
 	}
@@ -107,11 +96,14 @@ const createCar = async (req, res) => {
 const getEditCarPage = async (req, res) => {
 	try {
 		const car = await Car.findByPk(req.params.id);
+		if (!car) {
+			throw Error('Not Found');
+		}
 
 		res.render('admin/cars/edit-car', { car });
 	} catch (error) {
-		res.status(500).json({
-			status: 'FAIL',
+		res.render('errors/error.ejs', {
+			code: 404,
 			message: error.message,
 		});
 	}
@@ -119,28 +111,27 @@ const getEditCarPage = async (req, res) => {
 
 const editCar = async (req, res) => {
 	try {
+		const data = req.body;
+		data.image = req.file ? './images/' + req.file.originalname : data.image;
+
+		const car = await Car.findByPk(req.params.id);
+
+		// hapus gambar lama jika gambar di update
+		if (car.image != data.image) {
+			fs.unlinkSync(`./public/assets/${car.image}`);
+		}
+
 		await Car.update(req.body, {
 			where: {
 				id: req.params.id,
 			},
 		});
-		console.log(req.body);
 
 		req.flash('message', 'Data Berhasil Diperbarui!');
 		res.redirect('/admin/cars/list-car');
 	} catch (error) {
-		res.render('error.ejs', {
-			message: error.message,
-		});
-	}
-};
-
-const getCarsDetailPage = async (req, res) => {
-	try {
-		res.render('admin/cars/car-detail');
-	} catch (error) {
-		res.status(500).json({
-			status: 'FAIL',
+		res.render('errors/error.ejs', {
+			code: 400,
 			message: error.message,
 		});
 	}
@@ -148,6 +139,9 @@ const getCarsDetailPage = async (req, res) => {
 
 const deleteCar = async (req, res) => {
 	try {
+		const car = await Car.findByPk(req.params.id);
+		fs.unlinkSync(`./public/assets/${car.image}`);
+
 		await Car.destroy({
 			where: {
 				id: req.params.id,
@@ -157,7 +151,8 @@ const deleteCar = async (req, res) => {
 		req.flash('message', 'Data Berhasil Dihapus!');
 		res.redirect('/admin/cars/list-car');
 	} catch (error) {
-		res.render('error.ejs', {
+		res.render('errors/error.ejs', {
+			code: 500,
 			message: error.message,
 		});
 	}
@@ -165,7 +160,6 @@ const deleteCar = async (req, res) => {
 
 module.exports = {
 	getAdminCarsPage,
-	getCarsDetailPage,
 	createCar,
 	getAddCarPage,
 	getEditCarPage,

@@ -7,16 +7,7 @@ const { Op } = require('sequelize');
 
 const { Car } = require('../databases/models');
 
-//! schema validation data
-const carSchema = Joi.object().keys({
-	id: Joi.string().required(),
-	name: Joi.string().required(),
-	rentPerDay: Joi.number().required(),
-	capacity: Joi.number().required(),
-	image: Joi.string().required(),
-	createdAt: Joi.date().required(),
-	updatedAt: Joi.date().required(),
-});
+const { createDataValidation, updateDataValidation } = require('../validations/car-validation');
 
 //! general
 const getAllCars = async (req, res) => {
@@ -104,6 +95,14 @@ const getCarsById = async (req, res) => {
 };
 
 const createCar = async (req, res) => {
+	const { error } = createDataValidation(req.body);
+	if (error) {
+		return res.status(400).json({
+			status: 'FAIL',
+			error_message: error.details[0].message,
+		});
+	}
+
 	try {
 		const data = req.body;
 		data.id = randomUUID();
@@ -125,27 +124,30 @@ const createCar = async (req, res) => {
 };
 
 const updateCar = async (req, res) => {
+	const { error } = updateDataValidation(req.body);
+	if (error) {
+		return res.status(400).json({
+			status: 'FAIL',
+			error_message: error.details[0].message,
+		});
+	}
+
 	try {
-		const id = req.params.id;
-		const { name, rentPerDay, capacity, image } = req.body;
+		const data = req.body;
+		data.image = req.file ? './images/' + req.file.originalname : data.image;
 
-		const car = await Car.update(
-			{
-				name,
-				rentPerDay,
-				capacity,
-				image,
-			},
-			{
-				where: {
-					id,
-				},
-			}
-		);
+		const car = await Car.findByPk(req.params.id);
 
-		if (!car[0]) {
-			throw new Error('Car Not Found');
+		// hapus gambar lama jika gambar di update
+		if (car.image != data.image) {
+			fs.unlinkSync(`./public/assets/${car.image}`);
 		}
+
+		await Car.update(req.body, {
+			where: {
+				id: req.params.id,
+			},
+		});
 
 		res.status(200).json({
 			status: 'OK',
