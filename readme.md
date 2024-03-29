@@ -17,7 +17,7 @@
 
 ### API
 
-| METHOD | End Point        | Deskripsi                        | query                    |
+| METHOD | End Point        | Deskripsi                        | params                   |
 | ------ | ---------------- | -------------------------------- | ------------------------ |
 | GET    | /api/v1/cars     | Mendapatkan Semua Data Cars      | [sort, search, capacity] |
 | GET    | /api/v1/cars/:id | Mendapatkan Data Car Berdasar ID |                          |
