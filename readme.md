@@ -17,24 +17,26 @@
 
 ### API
 
-| METHOD | End Point        | Deskripsi                        |
-| ------ | ---------------- | -------------------------------- |
-| GET    | api/list-car     | Mendapatkan Semua Data Cars      |
-| GET    | api/list-car/:id | Mendapatkan Data Car Berdasar ID |
-| POST   | api/list-car     | Menambahkan Data Car             |
-| PUT    | api/list-car/:id | Me Update Data Car               |
-| DEL    | api/list-car/:id | Menghapus Data Car               |
+| METHOD | End Point        | Deskripsi                        | query                    |
+| ------ | ---------------- | -------------------------------- | ------------------------ |
+| GET    | /api/v1/cars     | Mendapatkan Semua Data Cars      | [sort, search, capacity] |
+| GET    | /api/v1/cars/:id | Mendapatkan Data Car Berdasar ID |                          |
+| POST   | /api/v1/cars     | Menambahkan Data Car             |                          |
+| PUT    | /api/v1/cars/:id | Me Update Data Car               |                          |
+| DEL    | /api/v1/cars/:id | Menghapus Data Car               |                          |
+|        |                  |                                  |                          |
 
 ### Web Page
 
-| End Point                    | Deskripsi                    |
-| ---------------------------- | ---------------------------- |
-| /                            | Halaman HomePage             |
-| /cars                        | Halaman Filter Cars (CH OOP) |
-|                              |                              |
-| admin/cars/list-car          | Halaman List Cars Dashboard  |
-| admin/cars/list-car/add      | Halaman Tambah Data Car      |
-| admin/cars/list-car/edit/:id | Halaman Edit Data Car        |
+| End Point                     | Deskripsi                    | link                                               |
+| ----------------------------- | ---------------------------- | -------------------------------------------------- |
+| /                             | Halaman HomePage             | http://localhost:2000/                             |
+| /cars                         | Halaman Filter Cars (CH OOP) | http://localhost:2000/cars                         |
+|                               |                              |                                                    |
+| /admin/cars/list-car          | Halaman List Cars Dashboard  | http://localhost:2000/admin/cars/list-car          |
+| /admin/cars/list-car/add      | Halaman Tambah Data Car      | http://localhost:2000/admin/cars/list-car/add      |
+| /admin/cars/list-car/edit/:id | Halaman Edit Data Car        | http://localhost:2000/admin/cars/list-car/edit/:id |
+|                               |                              |                                                    |
 
 # Data Diri
 
@@ -47,6 +49,7 @@
 |                  |                          |
 | ID Fasil         | **F-FSW24001086**        |
 | Nama Fasilitator | **Imam Taufiq Hermawan** |
+|                  |                          |
 
 # Fullstack Web Development
 
