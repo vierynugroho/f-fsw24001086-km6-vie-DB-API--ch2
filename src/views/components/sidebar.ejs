@@ -1,0 +1,65 @@
+<aside
+	class="collapse show collapse-horizontal float-start"
+	id="sidebar_nav"
+>
+	<div class="d-flex justify-content-start align-items-center">
+		<!--! MAIN MENU  -->
+		<div
+			class="bg-primary"
+			id="sidebar_menu"
+		>
+			<div
+				class="mt-2 rounded-0"
+				id="main_menu"
+			>
+				<a
+					href="/"
+					class="nav-link border-0 mx-auto rounded-0 my-2"
+					id="logo_admin"
+				></a>
+				<a
+					href="/admin/dashboard"
+					class="sidebar_menu-menu text-white nav-link border-0 rounded-0 d-flex pt-3 flex-column"
+				>
+					<img
+						src="/assets/images/fi_home.svg"
+						alt="err"
+					/>
+					<p>Dashboard</p>
+				</a>
+				<a
+					href="/admin/cars/list-car"
+					class="sidebar_menu-menu text-white nav-link border-0 rounded-0 d-flex pt-3 flex-column sidebar_menu-menu-active"
+				>
+					<img
+						src="/assets/images/fi_cars.svg"
+						alt="err"
+					/>
+					<p>Cars</p>
+				</a>
+			</div>
+		</div>
+		<!--! SUBMENU  -->
+		<div
+			class="d-flex flex-column"
+			id="sidebar_submenu"
+		>
+			<a href="/admin/dashboard">
+				<div
+					class="text-center nav-link mx-auto mt-2"
+					id="logo_admin-menu"
+				></div>
+			</a>
+			<a
+				href="/admin/cars/cars"
+				class="border-0 rounded-0 fw-bold py-3 px-4 nav-link"
+				>Cars</a
+			>
+			<a
+				href="/admin/cars/list-car"
+				class="border-0 rounded-0 fw-bold py-3 px-4 nav-link submenu_active"
+				>List Car</a
+			>
+		</div>
+	</div>
+</aside>

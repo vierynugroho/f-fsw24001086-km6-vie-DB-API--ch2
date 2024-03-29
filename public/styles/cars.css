@@ -12,7 +12,21 @@ h1 {
     font-size: 36px !important;
 }
 
+
 /* custom color */
+
+.alert-success {
+    background-color: #73CA5C !important;
+    color: white !important;
+    font-weight: bold !important;
+}
+
+.alert-dark {
+    background-color: #151515 !important;
+    color: white !important;
+    font-weight: bold !important;
+}
+
 .success-color {
     background-color: #5cb85f;
     color: white !important;

@@ -52,6 +52,7 @@ const getAdminCarsPage = async (req, res) => {
 			capacity: req.query.capacity,
 			searchTerm,
 			cars,
+			url: '',
 			message: req.flash('message', ''),
 		};
 
@@ -66,7 +67,12 @@ const getAdminCarsPage = async (req, res) => {
 
 const getAddCarPage = async (req, res) => {
 	try {
-		res.render('admin/cars/add-car');
+		const url = req.url;
+		const data = {
+			url: url,
+			field_error: req.flash('field_error', ''),
+		};
+		res.render('admin/cars/add-car', data);
 	} catch (error) {
 		res.render('errors/error.ejs', {
 			code: 500,
@@ -76,6 +82,11 @@ const getAddCarPage = async (req, res) => {
 };
 
 const createCar = async (req, res) => {
+	const { error } = createDataValidation(req.body);
+	if (error) {
+		req.flash('field_error', error.details[0].message);
+		return res.redirect('/admin/cars/list-car/add');
+	}
 	try {
 		const data = req.body;
 		data.id = randomUUID();
@@ -83,7 +94,7 @@ const createCar = async (req, res) => {
 
 		await Car.create(data);
 
-		req.flash('message', 'Berhasil Ditambah!');
+		req.flash('message', ['success', 'Berhasil Ditambah!']);
 		res.redirect('/admin/cars/list-car');
 	} catch (error) {
 		res.render('errors/error.ejs', {
@@ -96,11 +107,12 @@ const createCar = async (req, res) => {
 const getEditCarPage = async (req, res) => {
 	try {
 		const car = await Car.findByPk(req.params.id);
+
 		if (!car) {
 			throw Error('Not Found');
 		}
 
-		res.render('admin/cars/edit-car', { car });
+		res.render('admin/cars/edit-car', { url: '/edit', car });
 	} catch (error) {
 		res.render('errors/error.ejs', {
 			code: 404,
@@ -112,9 +124,10 @@ const getEditCarPage = async (req, res) => {
 const editCar = async (req, res) => {
 	try {
 		const data = req.body;
-		data.image = req.file ? './images/' + req.file.filename : data.image;
-
 		const car = await Car.findByPk(req.params.id);
+
+		data.image = req.file ? './images/' + req.file.filename : car.image;
+		console.log(data.image);
 
 		// hapus gambar lama jika gambar di update
 		if (car.image != data.image) {
@@ -127,7 +140,7 @@ const editCar = async (req, res) => {
 			},
 		});
 
-		req.flash('message', 'Data Berhasil Diperbarui!');
+		req.flash('message', ['success', 'Data Berhasil Diperbarui!']);
 		res.redirect('/admin/cars/list-car');
 	} catch (error) {
 		res.render('errors/error.ejs', {
@@ -148,7 +161,7 @@ const deleteCar = async (req, res) => {
 			},
 		});
 
-		req.flash('message', 'Data Berhasil Dihapus!');
+		req.flash('message', ['dark', 'Data Berhasil Dihapus!']);
 		res.redirect('/admin/cars/list-car');
 	} catch (error) {
 		res.render('errors/error.ejs', {

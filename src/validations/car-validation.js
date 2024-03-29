@@ -3,10 +3,9 @@ const Joi = require('joi');
 //! Create Car
 const createDataValidation = (data) => {
 	const carSchema = Joi.object().keys({
-		name: Joi.string().required(),
-		rentPerDay: Joi.number().required().min(0),
-		capacity: Joi.number().required().min(0),
-		image: Joi.string().required(),
+		name: Joi.string().trim().required(),
+		rentPerDay: Joi.number().min(0).required(),
+		capacity: Joi.number().min(0).required(),
 	});
 
 	return carSchema.validate(data);
@@ -14,9 +13,9 @@ const createDataValidation = (data) => {
 
 const updateDataValidation = (data) => {
 	const carSchema = Joi.object().keys({
-		name: Joi.string().required(),
-		rentPerDay: Joi.number().required().min(0),
-		capacity: Joi.number().required().min(0),
+		name: Joi.string().trim().required(),
+		rentPerDay: Joi.number().min(0).required(),
+		capacity: Joi.number().min(0).required(),
 	});
 
 	return carSchema.validate(data);

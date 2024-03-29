@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
 		if (allowedTypes.includes(file.mimetype)) {
 			cb(null, true);
 		} else {
-			throw Error(`Invalid MIME type! Allowed: ${allowedTypes}`);
+			return cb(new Error(`Only ${allowedTypes} are allowed`));
 		}
 	},
 	limits: {
