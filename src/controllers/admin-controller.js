@@ -67,11 +67,11 @@ const getAdminCarsPage = async (req, res) => {
 
 const getAddCarPage = async (req, res) => {
 	try {
-		const url = req.url;
 		const data = {
-			url: url,
+			url: req.url,
 			field_error: req.flash('field_error', ''),
 		};
+
 		res.render('admin/cars/add-car', data);
 	} catch (error) {
 		res.render('errors/error.ejs', {
@@ -81,12 +81,37 @@ const getAddCarPage = async (req, res) => {
 	}
 };
 
+const getEditCarPage = async (req, res) => {
+	try {
+		const car = await Car.findByPk(req.params.id);
+
+		if (!car) {
+			throw Error('Not Found');
+		}
+
+		const data = {
+			car,
+			url: '/edit',
+			field_error: req.flash('field_error', ''),
+		};
+
+		res.render('admin/cars/edit-car', data);
+	} catch (error) {
+		res.render('errors/error.ejs', {
+			code: 404,
+			message: error.message,
+		});
+	}
+};
+
 const createCar = async (req, res) => {
+	//! Validation
 	const { error } = createDataValidation(req.body);
 	if (error) {
 		req.flash('field_error', error.details[0].message);
 		return res.redirect('/admin/cars/list-car/add');
 	}
+
 	try {
 		const data = req.body;
 		data.id = randomUUID();
@@ -104,27 +129,17 @@ const createCar = async (req, res) => {
 	}
 };
 
-const getEditCarPage = async (req, res) => {
-	try {
-		const car = await Car.findByPk(req.params.id);
-
-		if (!car) {
-			throw Error('Not Found');
-		}
-
-		res.render('admin/cars/edit-car', { url: '/edit', car });
-	} catch (error) {
-		res.render('errors/error.ejs', {
-			code: 404,
-			message: error.message,
-		});
-	}
-};
-
 const editCar = async (req, res) => {
+	//! Validation
+	const car = await Car.findByPk(req.params.id);
+	const { error } = updateDataValidation(req.body);
+	if (error) {
+		req.flash('field_error', error.details[0].message);
+		return res.redirect(`/admin/cars/list-car/edit/${car.id}`);
+	}
+
 	try {
 		const data = req.body;
-		const car = await Car.findByPk(req.params.id);
 
 		data.image = req.file ? './images/' + req.file.filename : car.image;
 		console.log(data.image);

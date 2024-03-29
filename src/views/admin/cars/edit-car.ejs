@@ -147,6 +147,22 @@
 								</div>
 							</div>
 						</div>
+						<!--! FIELDS ERROR  -->
+						<% if(field_error != ''){ %>
+						<div
+							class="alert alert-danger alert-dismissible fade show w-100 mt-5"
+							role="alert"
+						>
+							<button
+								type="button"
+								class="btn-close"
+								data-bs-dismiss="alert"
+								aria-label="Close"
+							></button>
+							<strong>Error</strong> <%-field_error%>
+						</div>
+
+						<% } %>
 					</div>
 					<div class="row position-fixed bottom-0 my-4">
 						<div class="col-6 d-flex gap-2">
