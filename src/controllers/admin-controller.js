@@ -112,7 +112,7 @@ const getEditCarPage = async (req, res) => {
 const editCar = async (req, res) => {
 	try {
 		const data = req.body;
-		data.image = req.file ? './images/' + req.file.originalname : data.image;
+		data.image = req.file ? './images/' + req.file.filename : data.image;
 
 		const car = await Car.findByPk(req.params.id);
 
