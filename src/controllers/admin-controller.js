@@ -7,6 +7,7 @@ const { Op } = require('sequelize');
 const { Car } = require('../databases/models');
 const { createDataValidation, updateDataValidation } = require('../validations/car-validation');
 
+//TODO: RENDER PAGE
 const getAdminCarsPage = async (req, res) => {
 	try {
 		const capacity_value = req.query.capacity || '0';
@@ -104,6 +105,7 @@ const getEditCarPage = async (req, res) => {
 	}
 };
 
+//TODO: ACTION
 const createCar = async (req, res) => {
 	//! Validation
 	const { error } = createDataValidation(req.body);
@@ -119,7 +121,7 @@ const createCar = async (req, res) => {
 
 		await Car.create(data);
 
-		req.flash('message', ['success', 'Berhasil Ditambah!']);
+		req.flash('message', ['success', 'Data Berhasil Disimpan!']);
 		res.redirect('/admin/cars/list-car');
 	} catch (error) {
 		res.render('errors/error.ejs', {

@@ -1,8 +1,10 @@
 const express = require('express');
-const { getAdminCarsPage, getCarsDetailPage, getAddCarPage, getEditCarPage, createCar, deleteCar, editCar } = require('../controllers/admin-controller');
+
 const upload = require('../libs/multer');
 
 const router = express.Router();
+
+const { getAdminCarsPage, getCarsDetailPage, getAddCarPage, getEditCarPage, createCar, deleteCar, editCar } = require('../controllers/admin-controller');
 
 //! admin cars
 router.route('/').get(getAdminCarsPage);

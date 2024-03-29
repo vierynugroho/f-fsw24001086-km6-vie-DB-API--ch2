@@ -1,15 +1,12 @@
 require('dotenv/config');
 
-const Joi = require('joi');
+const fs = require('fs');
 
 const { randomUUID } = require('crypto');
 const { Op } = require('sequelize');
-
 const { Car } = require('../databases/models');
-
 const { createDataValidation, updateDataValidation } = require('../validations/car-validation');
 
-//! general
 const getAllCars = async (req, res) => {
 	try {
 		const capacity_value = req.query.capacity || '0';
@@ -75,7 +72,7 @@ const getCarsById = async (req, res) => {
 		const car = await Car.findByPk(id);
 
 		if (!car) {
-			throw new Error('Car Not Found');
+			throw new Error('Car Not Found!');
 		}
 
 		const data = {
@@ -95,6 +92,7 @@ const getCarsById = async (req, res) => {
 };
 
 const createCar = async (req, res) => {
+	//! Validation
 	const { error } = createDataValidation(req.body);
 	if (error) {
 		return res.status(400).json({
@@ -106,13 +104,13 @@ const createCar = async (req, res) => {
 	try {
 		const data = req.body;
 		data.id = randomUUID();
-		data.image = './images/' + req.file.originalname;
+		data.image = './images/' + req.file.filename;
 
 		const car = await Car.create(data);
 
 		res.status(201).json({
 			status: 'OK',
-			message: 'CREATE car success!',
+			message: 'Data Berhasil Disimpan!',
 			data: car,
 		});
 	} catch (error) {
@@ -123,7 +121,9 @@ const createCar = async (req, res) => {
 	}
 };
 
-const updateCar = async (req, res) => {
+const editCar = async (req, res) => {
+	//! Validation
+	const car = await Car.findByPk(req.params.id);
 	const { error } = updateDataValidation(req.body);
 	if (error) {
 		return res.status(400).json({
@@ -134,9 +134,9 @@ const updateCar = async (req, res) => {
 
 	try {
 		const data = req.body;
-		data.image = req.file ? './images/' + req.file.originalname : data.image;
 
-		const car = await Car.findByPk(req.params.id);
+		data.image = req.file ? './images/' + req.file.filename : car.image;
+		console.log(data.image);
 
 		// hapus gambar lama jika gambar di update
 		if (car.image != data.image) {
@@ -151,7 +151,7 @@ const updateCar = async (req, res) => {
 
 		res.status(200).json({
 			status: 'OK',
-			message: 'UPDATE car success!',
+			message: 'Data Berhasil Diperbarui!',
 			data: req.body,
 		});
 	} catch (error) {
@@ -164,23 +164,22 @@ const updateCar = async (req, res) => {
 
 const deleteCar = async (req, res) => {
 	try {
-		const id = req.params.id;
+		const car = await Car.findByPk(req.params.id);
 
-		const findCar = await Car.findByPk(id);
-
-		if (!findCar) {
-			throw new Error('Car Not Found');
+		if (!car) {
+			throw Error('Car Not Found!');
 		}
+		fs.unlinkSync(`./public/assets/${car.image}`);
 
 		await Car.destroy({
 			where: {
-				id,
+				id: req.params.id,
 			},
 		});
 
 		res.status(200).json({
 			status: 'OK',
-			message: 'DELETE car success!',
+			message: 'Data Berhasil Dihapus!',
 		});
 	} catch (error) {
 		res.status(400).json({
@@ -194,6 +193,6 @@ module.exports = {
 	getAllCars,
 	getCarsById,
 	createCar,
-	updateCar,
+	editCar,
 	deleteCar,
 };
