@@ -11,7 +11,12 @@
 
 # Postman Docs
 
-[DOCS HERE](https://documenter.getpostman.com/view/22814931/2sA35EY2XU)
+<p align='center'>
+<a href="https://documenter.getpostman.com/view/22814931/2sA35EY2XU" target="_blank" title="Postman Documentation"/>
+<img style='width: 20%' src='https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white' alt='Postman Docs' title='Postman Docs'>
+</p>
+
+[READ HERE](https://documenter.getpostman.com/view/22814931/2sA35EY2XU)
 
 # Endpoint
 
