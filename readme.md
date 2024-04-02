@@ -5,8 +5,8 @@
 # Database Diagram
 
 <p align='center'>
-<img style='width: 45%' src='./ERD.jpg' alt='ERD Navicat' title='from navicat'>
-<img style='width: 45%' src='./dbdiagram_cars.png' alt='ERD DBDiagram' title='from DB Diagram IO'>
+<img style='width: 45%' src='./navicat_erd.png' alt='ERD Navicat' title='from navicat'>
+<img style='width: 45%' src='./dbdiagram_erd.png' alt='ERD DBDiagram' title='from DB Diagram IO'>
 </p>
 
 # Postman Docs
