@@ -1,11 +1,12 @@
 require('dotenv/config');
 
-const fs = require('fs');
-
 const { randomUUID } = require('crypto');
 const { Op } = require('sequelize');
 const { Car } = require('../databases/models');
 const { createDataValidation, updateDataValidation } = require('../validations/car-validation');
+
+const imageKit = require('../libs/imageKit');
+const handleUploadImage = require('../services/handleUploadImage');
 
 const getAllCars = async (req, res) => {
 	try {
@@ -103,8 +104,18 @@ const createCar = async (req, res) => {
 
 	try {
 		const data = req.body;
+		const file = req.file;
+
+		if (file && (data !== '' || data !== undefined)) {
+			const strFile = file.buffer.toString('base64');
+
+			const { url, fileId } = await handleUploadImage(file, strFile);
+
+			data.image = url;
+			data.image_id = fileId;
+		}
+
 		data.id = randomUUID();
-		data.image = './images/' + req.file.filename;
 
 		const car = await Car.create(data);
 
@@ -134,13 +145,19 @@ const editCar = async (req, res) => {
 
 	try {
 		const data = req.body;
+		const file = req.file;
 
-		data.image = req.file ? './images/' + req.file.filename : car.image;
-		console.log(data.image);
+		if (file) {
+			const strFile = file.buffer.toString('base64');
+			const { url, fileId } = await handleUploadImage(file, strFile);
 
-		// hapus gambar lama jika gambar di update
-		if (car.image != data.image) {
-			fs.unlinkSync(`./public/assets/${car.image}`);
+			data.image = url;
+			data.image_id = fileId;
+
+			// hapus gambar lama
+			await imageKit.deleteFile(car.image_id);
+		} else {
+			car.image;
 		}
 
 		await Car.update(req.body, {
@@ -169,7 +186,10 @@ const deleteCar = async (req, res) => {
 		if (!car) {
 			throw Error('Car Not Found!');
 		}
-		fs.unlinkSync(`./public/assets/${car.image}`);
+
+		if (car.image != '' || car.image_id != '') {
+			await imageKit.deleteFile(car.image_id);
+		}
 
 		await Car.destroy({
 			where: {

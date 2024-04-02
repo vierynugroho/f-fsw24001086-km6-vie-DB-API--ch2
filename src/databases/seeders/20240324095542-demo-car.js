@@ -16,7 +16,8 @@ module.exports = {
 				name: `Car ${i}`,
 				rentPerDay: `${i}0000`,
 				capacity: allowedNumbers[randomIndex],
-				image: `./images/car0${i}.min.jpg`,
+				image: ``,
+				image_id: ``,
 				createdAt: new Date(),
 				updatedAt: new Date(),
 			});

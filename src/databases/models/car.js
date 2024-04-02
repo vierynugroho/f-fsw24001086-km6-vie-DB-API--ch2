@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
 			rentPerDay: DataTypes.FLOAT,
 			capacity: DataTypes.INTEGER,
 			image: DataTypes.TEXT,
+			image_id: DataTypes.TEXT,
 		},
 		{
 			sequelize,

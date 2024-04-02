@@ -103,7 +103,11 @@
 							<img
 								class="img-fluid"
 								id="img-car"
-								src="/assets/<%- car.image %>"
+								src="<% if(car.image == '') {%>  
+									https://ik.imagekit.io/vieryn/default-image.jpeg?updatedAt=1712035532211
+									<% } else {%> 
+									<%- car.image %>	
+									<% } %>"
 								alt="<%- car.name %>"
 							/>
 							<h2
